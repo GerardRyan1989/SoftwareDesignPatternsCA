@@ -6,6 +6,7 @@ public class Card{
 	private String suit;
 	private int value;
 	private ImageIcon cardImage;
+	private String hello;
 	
 	public Card(String name, String suit,int value,ImageIcon cardImage){
 		
