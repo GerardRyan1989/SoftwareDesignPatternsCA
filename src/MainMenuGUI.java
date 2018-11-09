@@ -9,14 +9,14 @@ import java.util.*;
 public class MainMenuGUI extends JFrame implements ActionListener {// inheriting from JFrame Class and implenting the absract class/interface ActionListener
 	private int gamenum =0;//declaring gamenum and assigning gamenum a default value of 0
 	private static double balance =0;//declaring balance and assigning it a default valuue of 0
-	private User u1;//declaring u1 of Utype User
+	private CardPlayer u1;//declaring u1 of Utype CardPlayer
 	private ImageIcon blackjackBG = new ImageIcon("cards/background.jpg");//declaring ImageIcon and setting path to image
 	private JLabel 	backgroundImage;//deeclaring JLabel
 	private JMenuBar menuStrip; //Declaring JMenuBar to be added to gui further in Program
 	private JMenu file, play, register,info ;//Declaring Jmenus to add to JmenuBar
 	private JMenuItem newGame, loadGame, saveGame, newUser, exit, rulesOfGame;//declaring JmenuItems to add to Jmenu
 	private JPanel  backGround; //declaring Jpanel which is added togui furte in program
-	private	ArrayList <User>users = new ArrayList<User>();//Declaring an arraylist of type user that will be used to save and load files
+	private	ArrayList <CardPlayer>users = new ArrayList<CardPlayer>();//Declaring an arraylist of type user that will be used to save and load files
 	private BlackJackGUI table;
 		
 	public MainMenuGUI(){
@@ -29,8 +29,8 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 		rulesOfGame = new JMenuItem("Rules of BlackJack");//instainating JmenuItem
 		newGame.addActionListener(this);//adding actionlistener to new gaame
 		rulesOfGame.addActionListener(this);//adding actionlistener to rules of game
-		loadGame = new JMenuItem("Load User Details");//instainating JmenuItem
-		saveGame = new JMenuItem("Save User Details");//instainating JmenuItem
+		loadGame = new JMenuItem("Load CardPlayer Details");//instainating JmenuItem
+		saveGame = new JMenuItem("Save CardPlayer Details");//instainating JmenuItem
 		loadGame.addActionListener(this);//adding actionlistener load game
 		saveGame.addActionListener(this);//adding actionlistener to save game
 		register = new JMenu("Users");//Instaniating a Jmenu
@@ -38,8 +38,8 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 		file= new JMenu("File");//Instaniating a Jmenu
 		play = new JMenu("Play");//Instaniating a Jmenu
 		exit = new JMenuItem("Exit");//instainating JmenuItem
-		newUser = new JMenuItem("Register New User");//instainating JmenuItem
-		newUser.addActionListener(this);//adding actionlistener to new User
+		newUser = new JMenuItem("Register New CardPlayer");//instainating JmenuItem
+		newUser.addActionListener(this);//adding actionlistener to new CardPlayer
 		info.add(rulesOfGame);
 		register.add(newUser);
         register.add(loadGame);
@@ -89,7 +89,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 			String name  ="";
 			int age =0;
 			double balance =0;
-		    u1 = new User();
+		    u1 = new CardPlayer();
 		   
 		    
 		  do{
@@ -144,10 +144,10 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
             catch (IOException f){
                  f.printStackTrace();
             }//io exception try catch
-		}//end of actionperformed New User
+		}//end of actionperformed New CardPlayer
 		if(e.getSource() == rulesOfGame){
 			
-			JOptionPane.showMessageDialog(null,"***Rules of BlackJack***\n\n1: Each person Starts with 2 cards.\n2:Hit-- User takes another Card\n3:Stick--User takes no more cards and sticks with current hand\n4:"
+			JOptionPane.showMessageDialog(null,"***Rules of BlackJack***\n\n1: Each person Starts with 2 cards.\n2:Hit-- CardPlayer takes another Card\n3:Stick--CardPlayer takes no more cards and sticks with current hand\n4:"
 				 + "Deal--  A new game of BlackJack is started\n5:Stake-- The amount of money the user wish to bet on each game(odds are Even) \n6: The maximum cards a player can have at any one time  is 5." +
 					"\n6: The winner is decided by hich hand has a greater value and/or if a hand is greater than 21 it results in a loss"+
 						" \n7: If the user has the same value as the dealer e.g. both the dealer and the user have  21, it will result in a split pot i.e both parties share the winnings");
@@ -192,7 +192,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 		
 			for( i =0; i < users.size(); i++){
 				output += i +": " + users.get(i).toString() + "\n";
-			}//inside the for loop we add to a String the User values of each eleement
+			}//inside the for loop we add to a String the CardPlayer values of each eleement
 			  output += "\n\n please choose the number of the game you wish to load"; 
 			do{
 				try{
@@ -235,7 +235,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
       	try{
       	  ObjectInputStream is;
       	  is = new ObjectInputStream(new FileInputStream ("users.dat"));
-          users  = (ArrayList<User>) is.readObject(); 
+          users  = (ArrayList<CardPlayer>) is.readObject();
       	  is.close();
       	}
       	catch(Exception e){

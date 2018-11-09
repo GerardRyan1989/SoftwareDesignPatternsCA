@@ -19,9 +19,10 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 	private Card [] shuffled = new Card[52];// declaring a card array to hold 52 cards in a random sequence
 	private int userValue =0 , dealerValue=0;// declaring the values of users and dealers hand
 	private double stake = 0;//declaring the stake attribute original value before the user alters it
-	Dealer dealer;//declaring a dealer attribute
+	CardDealer dealer;//declaring a dealer attribute
 	Deck deck;//declaring a deck attribute
 	private MainMenuGUI mainMenu;// declaring a MainnMenu Atribute
+	private Card[] shuffledDeck;
 
 	
 public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI to balckjack gui
@@ -125,16 +126,16 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		hitbtn.setVisible(false);//setting to false as user wont need till stake is set
 		dealbtn.setVisible(false);//setting to false as user wont need till stake is set
 		setResizable(false);// disabling GUI to be resized
-		dealer = new Dealer();//instaniatiing a new dealer
+		dealer = new CardDealer();//instaniatiing a new dealer
 		dealer.setBalance(50000);//setting dealers balance
 		dealer.setName("Dealers");//setting dealers name
 	    deck = new Deck();// instaniaaiting a new deck
-		deck.shuffledDeck();//calling shuffeld deck method
         infoHold.setText( dealer.getName() +" Balance: €" +dealer.getBalance());//setting text of dealers details
         infoHold2.setText(name +" Balance: €" + String.format("%.2f",balance) + " Stake €:" + String.format("%.2f", stake));//setting text of users deatails
+	    shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();//calling shuffeld deck method
 		for(int i = 0; i < shuffled.length; i++)
 		{
-			shuffled[i] = deck.shuffled[i];
+			shuffled[i] = shuffledDeck[i];
 		}//in here the shuffled array takes on the values of the deck.shuffled array
 	}//end of BlackJackgui Constructor
 
@@ -240,11 +241,12 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 				
 					if(j > 50)
 			   	   		{
-			   	   			Deck SD = new Deck();
-			   	   			SD.shuffledDeck();
+			   	   			shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();
+
+
 			   	   			for(int x =0; x < shuffled.length; x++)
 					   	   			{
-					   	   				shuffled[x] = SD.shuffled[x];	
+					   	   				shuffled[x] = shuffledDeck[x];
 					   	   			}
 			   	   		   JOptionPane.showMessageDialog(null,"The current deck in use is now empty....\n\n\nplease wait while the dealer shuffles a new deck");
 			   	   	
@@ -253,7 +255,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			   	   
 			   	   if(userValue > 21)
 			   	   {
-			   	   	  JOptionPane.showMessageDialog(null,"Dealer wins as you have bust \n\nPress Deal to start a new hand" +"\nYou had: " + userValue,"Not This Time", JOptionPane.INFORMATION_MESSAGE);
+			   	   	  JOptionPane.showMessageDialog(null,"CardDealer wins as you have bust \n\nPress Deal to start a new hand" +"\nYou had: " + userValue,"Not This Time", JOptionPane.INFORMATION_MESSAGE);
 			   	   	  dealbtn.setVisible(true);
 			  		  stickbtn.setVisible(false);
 			  		  hitbtn.setVisible(false);
@@ -312,11 +314,11 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					
 					if(j >50)
 			   	   		{
-			   	   			Deck SD = new Deck();
-			   	   			SD.shuffledDeck();
+			   	   			shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();
+
 			   	   			for(int x =0; x < shuffled.length; x++)
 					   	   			{
-					   	   				shuffled[x] = SD.shuffled[x];	
+					   	   				shuffled[x] = shuffledDeck[x];
 					   	   			}
 			   	   		   JOptionPane.showMessageDialog(null,"The current deck in use is now empty....\n\n\nplease wait while the dealer shuffles a new deck");
 			   	   	
@@ -361,11 +363,11 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 
 						if(j >45)
 			   	   		{
-			   	   			Deck SD = new Deck();
-			   	   			SD.shuffledDeck();
+
+			   	   			shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();
 			   	   			for(int x =0; x < shuffled.length; x++)
 					   	   			{
-					   	   				shuffled[x] = SD.shuffled[x];	
+					   	   				shuffled[x] = shuffledDeck[x];
 					   	   			}
 			   	   		   JOptionPane.showMessageDialog(null,"The current deck in use is now empty....\n\n\nplease wait while the dealer shuffles a new deck");
 			   	   	
@@ -473,7 +475,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		    	
 		    					if(dealerValue < 21 && dealerValue < userValue && k==5)
 									{
-									   	JOptionPane.showMessageDialog(null,"***Congratulations***\nYou win The Dealer has " + dealerValue +" You have " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
+									   	JOptionPane.showMessageDialog(null,"***Congratulations***\nYou win The CardDealer has " + dealerValue +" You have " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
 									   	dealbtn.setVisible(true);
 			  		 					hitbtn.setVisible(false);
 			  							stickbtn.setVisible(false);
@@ -484,7 +486,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			
 								if(dealerValue > 21)
 									{
-									   	JOptionPane.showMessageDialog(null,"***Congratulations***\nThe Dealer has Bust\nYou win this Time" +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
+									   	JOptionPane.showMessageDialog(null,"***Congratulations***\nThe CardDealer has Bust\nYou win this Time" +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
 									   	dealbtn.setVisible(true);
 			  		 					hitbtn.setVisible(false);
 			  							stickbtn.setVisible(false);

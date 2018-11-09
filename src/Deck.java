@@ -6,10 +6,13 @@ public class Deck{
 	private String suit="";       // card Suit
 	private String name="";       // card Name
 	private int value =0, num =0; // value is int value of card,// num is increment each time in for loop and reaches a value of 51, this is used to get an imageIcon
-    static Card [] deck = new Card[52];// an  array to hold 52 cards in the order of 1 to 52
-    static Card [] shuffled = new Card[52];//an array to hold a 52 cards in a random order
-	
+    private Card [] deck = new Card[52];// an  array to hold 52 cards in the order of 1 to 52
+
+
 	public Deck(){
+
+	}
+	public Card[] createDeck(){
 
 		for(int j =0; j < 4; j++){
 
@@ -77,24 +80,8 @@ public class Deck{
 		 	
 			}//end of the inner nested loop
 		}//end of the outer loop
-			
-	}//end of the deck constructor
 
-	public void shuffledDeck(){
-		boolean [] check = new boolean[52];                             //this populates the shuffled deck in a random order with out any cards repeating
-		for(int i = 0; i < 52; i++)										//it uses a boolean array of the same size as shuffled array which set to false
-			{															//it generates a random number from 1 to 52 and if this element of the array matching the random number
-				int random = (int)(Math.random()*52);					//is set to true it will loop till it generates a random number where the matching element of the boolean array is
-				while(check[random])									//false and it will then store the element of deck matching the random number in the shuffled array
-				{	
-						random = (int)(Math.random()*52);	
-				}
-				
-				check[random] = true;
-				shuffled[i] = deck[random];
-			}//end of loop
-				
-		
-		}// end of shuffled deck method
+		return deck;
+	}
 }//end of main
 
