@@ -18,16 +18,18 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 	private ImageIcon bcard, card1, card2, card3, card4, card5, dcard1, dcard2, dcard3, dcard4, dcard5;//declaring imageIcons to hold paths assigned to image lateer in program
 	private Card [] shuffled = new Card[52];// declaring a card array to hold 52 cards in a random sequence
 	private int userValue =0 , dealerValue=0;// declaring the values of users and dealers hand
-	private double stake = 0;//declaring the stake attribute original value before the user alters it
+	//private double stake = 0;//declaring the stake attribute original value before the user alters it
 	CardDealer dealer;//declaring a dealer attribute
+	CardPlayer cardPlayer = new CardPlayer();
 	Deck deck;//declaring a deck attribute
-	private MainMenuGUI mainMenu;// declaring a MainnMenu Atribute
+	private MainMenuGUI mainMenu;// declaring a Main Menu Attribute
 	private Card[] shuffledDeck;
-
+	Pot pot;
 	
 public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI to balckjack gui
 		super("BlackJack");
 		this.mainMenu = mainMenu;// setting mainmenu to Main
+		pot = new Pot();
 		setSize(800,600);
 		setLocation(350,100);
 		setLayout(new GridLayout(5,1));//setting grid layout so 5 Jpanels can be addded
@@ -129,9 +131,10 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		dealer = new CardDealer();//instaniatiing a new dealer
 		dealer.setBalance(50000);//setting dealers balance
 		dealer.setName("Dealers");//setting dealers name
+		pot.registerObserver(dealer); // adding dealer to listener
 	    deck = new Deck();// instaniaaiting a new deck
-        infoHold.setText( dealer.getName() +" Balance: €" +dealer.getBalance());//setting text of dealers details
-        infoHold2.setText(name +" Balance: €" + String.format("%.2f",balance) + " Stake €:" + String.format("%.2f", stake));//setting text of users deatails
+        infoHold.setText( dealer.getName() +" Balance: €" + dealer.getBalance());//setting text of dealers details
+        infoHold2.setText(cardPlayer.getName() +" Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//setting text of users deatails
 	    shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();//calling shuffeld deck method
 		for(int i = 0; i < shuffled.length; i++)
 		{
@@ -142,8 +145,6 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == hitbtn){
-					
-					
 					if(i == 0){
 						card1 = new ImageIcon(shuffled[j].getImage());
 						userCard1.setIcon(card1);
@@ -260,11 +261,9 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			  		  stickbtn.setVisible(false);
 			  		  hitbtn.setVisible(false);
 			  		  stakebtn.setVisible(true);
-			  		  balance -= stake;
-			  		  dbalance = dealer.getBalance() + stake;
-			  		  dealer.setBalance(dbalance);
-			  		  infoHold2.setText(name +"'s Balance: €" + String.format("%.2f",balance) + " Stake €:" + String.format("%.2f", stake));
-			  		  infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
+			  		  pot.gameFinished(dealer);
+			  		  infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+			  		  infoHold.setText(dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
 
                    }//checking user has bust before dealers has to take any cards
 			   	   
@@ -275,10 +274,10 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			
 			if(e.getSource() == dealbtn){
 				ace = 0;
-					if(stake > dealer.getBalance()){
+					if(pot.getStake() > dealer.getBalance()){
                         JOptionPane.showMessageDialog(null,"that stake is more money than the dealer has at this table\n +" +
                                 "please wait while we get more money to the table");
-                        dealer.setBalance(dealer.getBalance() +(stake*10));
+                        dealer.setBalance(dealer.getBalance() +(pot.getStake()*10));
 					}//changing dealer balances it will always be greater than stake placed
 				    ace =0;//reseting ace to zero  as its used as a counter t determine the value of an ace
 					stakebtn.setVisible(false);
@@ -325,7 +324,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			   	   			j=0;
 			   	  		 }//calling shuffled method if the element of the shuffled array is greater than 50 to stop an index out of bounds error
 			   	  		 
-			   	  	while(stake > balance){
+			   	  	while(pot.getStake() > cardPlayer.getBalance()){
 			   	  	
 			   	  		boolean valid = false;
 			   	  		do{
@@ -335,12 +334,14 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			   	  						"Would you like deposit Money","Insuffiecnt Funds",JOptionPane.YES_NO_OPTION);
 			   	  				if(yesNO == 0)
 			   	  					{
-			   	  						balance += Integer.parseInt(JOptionPane.showInputDialog(null,"how much would you like to deposit:"));
+			   	  						cardPlayer.updateBalance(Integer.parseInt(JOptionPane.showInputDialog(null,"how much would you like to deposit:")));
 			   	  					}
 			   	  				else
 			   	  					{
-			   	  					stake = Double.parseDouble(JOptionPane.showInputDialog(null,"please reudce your Stake as it\n" +
-			   	  						"it is greater than you balance\n enter new stake here:"));	
+			   	  						var tempStake  = Double.parseDouble(JOptionPane.showInputDialog(null,"please reudce your Stake as it\n" +
+			   	  						"it is greater than you balance\n enter new stake here:"));
+
+										pot.setStake(tempStake);
 			   	  					}
 				   	  			
 				   	  			
@@ -352,7 +353,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			   	  		
 			   	  	}// end of if ststement so user cant bet more money than whats in their balance
 					i = 0;
-                    infoHold2.setText(name +"'s Balance: €" + String.format("%.2f",balance) + " Stake €:" + String.format("%.2f", stake));
+                    infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
                     infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));//these two lines are reseting  users/dealers detailson screen
 
             }//end of actionPerformed Deal Button
@@ -380,7 +381,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 						}//Setting aces value so it will be either one or eleven based on when the user sticks
 
 
-						ace = 0;//reseting aces after user
+						ace = 0;// reseting aces after user
 						crdholder2.remove(dealerCard1);
 					    crdholder2.remove(dealerCard2);
 			   	    	dcard1 = new ImageIcon(shuffled[j].getImage());
@@ -408,7 +409,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 							}
 						j++;
 						crdholder2.revalidate();
-						crdholder2.repaint(); //the above two blocks of code remove the backofcard iage from screen and replace with two random card images
+						crdholder2.repaint(); //the above two blocks of code remove the back of card image from screen and replace with two random card images
 							
 				   if(dealerValue < userValue && dealerValue < 21)
 				   {
@@ -479,9 +480,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 									   	dealbtn.setVisible(true);
 			  		 					hitbtn.setVisible(false);
 			  							stickbtn.setVisible(false);
-			  							balance += stake;
-			  							dbalance = dealer.getBalance()-stake;
-			  							dealer.setBalance(dbalance);
+										pot.gameFinished(cardPlayer);
 									}// end of if statement checking if dealer has five cards and comparing users/dealers values
 			
 								if(dealerValue > 21)
@@ -490,9 +489,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 									   	dealbtn.setVisible(true);
 			  		 					hitbtn.setVisible(false);
 			  							stickbtn.setVisible(false);
-			  							balance += stake;
-										dbalance = dealer.getBalance()-stake;
-										dealer.setBalance(dbalance);
+			  							pot.gameFinished(cardPlayer);
 									}// end of if staement checking if dealer has bust
 									
 								if(dealerValue > userValue && dealerValue <= 21)
@@ -501,9 +498,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 										dealbtn.setVisible(true);
 			  							hitbtn.setVisible(false);
 			  		 					stickbtn.setVisible(false);
-			  		 					balance -= stake;
-			  		 					dbalance = dealer.getBalance() + stake;
-			  		 					dealer.setBalance(dbalance);
+										pot.gameFinished(dealer);
 									}//end of if statement comparing users and deales values
 								
 								if(dealerValue == userValue)
@@ -517,8 +512,8 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 									}// end of if statement checking for a draw
 
 
-                                infoHold2.setText(name +"'s Balance: €" + String.format("%.2f",balance) + " Stake €:" + String.format("%.2f", stake));
-								//reseting text of user and dealer details
+                                infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+								infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));//these two lines are reseting  users/dealers detailson screen
 
 
                                 dealerValue =0; // reseting dealer and user values to zero fo next hand
@@ -540,8 +535,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 				do{
 					//try catch implement to try and catch any number formatting problems when setting the stake size
 				    try{
-				    	stake = Double.parseDouble(JOptionPane.showInputDialog("Set Your Stake:"));//asking user to set stake size
-				    	
+				    	pot.setPotValues(Double.parseDouble(JOptionPane.showInputDialog("Set Your Stake:")));//asking user to set stake size);
 				    	valid = true;// setting valid to true to break loop when the value supplied is a number of type double
 				    }catch(NumberFormatException x)
 				    {
@@ -550,20 +544,23 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					
 					
 				}while(valid == false);//end of do while statement
-                infoHold2.setText(name +"'s Balance: €" + String.format("%.2f",balance) + " Stake €:" + String.format("%.2f", stake));//
+                infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//
                 infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
-                usersHand.setText(name +"'s Hand: ");//the three lines of code above are resetting text of user details, dealer details and stake incase of changes
+                usersHand.setText(cardPlayer.getName()+"'s Hand: ");//the three lines of code above are resetting text of user details, dealer details and stake incase of changes
 
 
 			}//end of actionPerformed StakeBtn
 			
 			if(e.getSource() == back)
 			{
-					    MainMenuGUI.setBal(balance);
+					    MainMenuGUI.setBal(cardPlayer.getBalance());
 					    mainMenu.setVisible(true);
 						this.setVisible(false);
+						//pot.removeObserver(dealer); // removing from listener when game ends
+			      		pot.registerObserver(cardPlayer); // removing from listener when game ends
+
 						
-			}//end of actionperformed Back
+			}//end of action performed Back
 			
 			if(e.getSource() == exit)
 			{
@@ -574,6 +571,8 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					{
 							
 							System.exit(0);
+							//pot.removeObserver(dealer); // removing from listener when game ends
+							pot.registerObserver(cardPlayer); // removing from listener when game ends
 					}	
 				else
 					{
@@ -581,10 +580,12 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					}				  
 			}// end of actionperformed Exit
 		}// end of actionPerformed statements
-	public void getBalName(double bal, String name)
+	public void setCardPlayer(CardPlayer player)
 	{
-		this.balance = bal;    //this method is used to pass a user name and balance from the MainMenuGUI class
-		this.name = name;     //
+		cardPlayer = player;
+		infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+		pot.registerObserver(cardPlayer);
+
 	}//end of getnamebal method
-	
+
 }//end of BlackJackGUI class
