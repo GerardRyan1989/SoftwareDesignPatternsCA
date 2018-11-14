@@ -38,8 +38,6 @@ public abstract class SystemUser implements Serializable{
         this.balance = balance;
     }
 
-
-
     /**
      *Changes the name of the user
      *@param uName this should include both forename and surname
@@ -64,6 +62,10 @@ public abstract class SystemUser implements Serializable{
         this.balance = balance;
     }
 
+
+    public void updateBalance(double updateAmount){
+        this.balance += updateAmount;
+    }
     /**
      *Gets the forename and surname of this user
      *@return this users name

@@ -132,7 +132,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		dealer.setBalance(50000);//setting dealers balance
 		dealer.setName("Dealers");//setting dealers name
 		pot.registerObserver(dealer); // adding dealer to listener
-	    deck = new Deck();// instaniaaiting a new deck
+	    deck = Deck.getDeck(); // instaniaaiting a new deck
         infoHold.setText( dealer.getName() +" Balance: €" + dealer.getBalance());//setting text of dealers details
         infoHold2.setText(cardPlayer.getName() +" Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//setting text of users deatails
 	    shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();//calling shuffeld deck method

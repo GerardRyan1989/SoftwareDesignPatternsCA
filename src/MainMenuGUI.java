@@ -74,9 +74,10 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
                 }
 			else	
 				{
-					table.getBalName(u1.getBalance(), u1.getName());
+					table.setCardPlayer(u1);
 					table.setVisible(true);
 					this.setVisible(false);
+					System.out.print(u1.getClass());
 				}
 
 		}//end of action performed new game, loads black jack Gui if a user is selected
@@ -208,7 +209,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 			u1.setName(users.get(gamenum).getName());
 			u1.setAge(users.get(gamenum).getAge());
 			u1.setBalance(users.get(gamenum).getBalance());//this block of code gets the details of an element determined by user input  from the arraylist,
-			table.getBalName(u1.getBalance(), u1.getName());// and passes it to the BlackJackGUI
+			table.setCardPlayer(u1);// and passes it to the BlackJackGUI
 		}// end of the actionperformed Loadgame
 	}//end of actionperformed
 	
@@ -242,5 +243,6 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
       		JOptionPane.showMessageDialog(null,"open didn't work");
       		e.printStackTrace();
       	}
+
       }//end of open, this allows a user to load their file
 }//end of class

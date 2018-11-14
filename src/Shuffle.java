@@ -1,7 +1,7 @@
 public class Shuffle implements ShuffleBehaviour{
 
     public Card [] shuffleDeck(){
-        Deck deck = new Deck();
+        Deck deck = Deck.getDeck();
         Card[] shuffled = new Card[52];
         Card[] newDeck =  deck.createDeck();
         boolean [] check = new boolean[52];                             //this populates the shuffled deck in a random order with out any cards repeating
