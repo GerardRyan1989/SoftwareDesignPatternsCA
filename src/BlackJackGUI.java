@@ -556,7 +556,7 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 					
 					
 				}while(valid == false);//end of do while statement
-                
+
                 infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//
                 infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
                 usersHand.setText(cardPlayer.getName()+"'s Hand: ");//the three lines of code above are resetting text of user details, dealer details and stake incase of changes
