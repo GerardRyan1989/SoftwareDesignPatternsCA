@@ -25,10 +25,13 @@ public class Pot implements Subject{
     }
 
     public void updateObservers(){
-        for (int i = 0; i < observers.size(); i++) {
-            Observer observer = (Observer) observers.get(i);
-            observer.update(winner, stake);
+        if(this.winner != null){
+            for (int i = 0; i < observers.size(); i++) {
+                Observer observer = (Observer) observers.get(i);
+                observer.update(winner, stake);
+            }
         }
+
     }
 
     public void setPotValues(double stake){

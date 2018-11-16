@@ -16,17 +16,20 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 	private JLabel dealerCard1, dealerCard2, dealerCard3, dealerCard4, dealerCard5, dealersHand;//declaring Jpanels to hold (Jlabels with ImageIcons Attached)
 	private JPanel crdholder, crdholder2, btnholder, spaceholder, spaceholder2;//declaring Jpanels to hold (Jlabels with ImageIcons Attached)
 	private ImageIcon bcard, card1, card2, card3, card4, card5, dcard1, dcard2, dcard3, dcard4, dcard5;//declaring imageIcons to hold paths assigned to image lateer in program
-	private Card [] shuffled = new Card[52];// declaring a card array to hold 52 cards in a random sequence
+	private PlayingCard[] shuffled = new PlayingCard[52];// declaring a card array to hold 52 cards in a random sequence
 	private int userValue =0 , dealerValue=0;// declaring the values of users and dealers hand
 	//private double stake = 0;//declaring the stake attribute original value before the user alters it
 	CardDealer dealer;//declaring a dealer attribute
 	CardPlayer cardPlayer = new CardPlayer();
 	Deck deck;//declaring a deck attribute
 	private MainMenuGUI mainMenu;// declaring a Main Menu Attribute
-	private Card[] shuffledDeck;
-	Pot pot;
-	
-public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI to balckjack gui
+	private PlayingCard[] shuffledDeck;
+	private Pot pot;
+    private WinLoseCheck winCheck;
+    private String chosenGame;
+    private Boolean isBust;
+
+    public BlackJackGUI(MainMenuGUI mainMenu, String GameChoice){//passing in instance of mainmenuGUI to balckjack gui
 		super("BlackJack");
 		this.mainMenu = mainMenu;// setting mainmenu to Main
 		pot = new Pot();
@@ -133,9 +136,12 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		dealer.setName("Dealers");//setting dealers name
 		pot.registerObserver(dealer); // adding dealer to listener
 	    deck = Deck.getDeck(); // instaniaaiting a new deck
-        infoHold.setText( dealer.getName() +" Balance: €" + dealer.getBalance());//setting text of dealers details
+        infoHold.setText(dealer.getName() +" Balance: €" + dealer.getBalance());//setting text of dealers details
         infoHold2.setText(cardPlayer.getName() +" Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//setting text of users deatails
 	    shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();//calling shuffeld deck method
+        chosenGame = GameChoice;
+
+
 		for(int i = 0; i < shuffled.length; i++)
 		{
 			shuffled[i] = shuffledDeck[i];
@@ -143,6 +149,16 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 	}//end of BlackJackgui Constructor
 
 		public void actionPerformed(ActionEvent e) {
+
+            if(chosenGame.equals("BlackJack")){
+                winCheck = new WinLoseTwentyOne();
+                winCheck.setBustValue(21);
+            }
+
+            if(chosenGame.equals("FortyFive")){
+                winCheck = new WinLoseFortyFive();
+                winCheck.setBustValue(45);
+            }
 
 			if (e.getSource() == hitbtn){
 					if(i == 0){
@@ -235,7 +251,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 						hitbtn.setVisible(false);
 					}//seting stick button to  false as user has best hand possible
 					
-					if(userValue >=2 && ace > 0)
+					if(userValue >= 2 && ace > 0)
 					{
 						stickbtn.setVisible(true);
 					}//seting stick button to visible once user value is 12 or greater
@@ -253,19 +269,21 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 			   	   	
 			   	   			j=0;
 			   	  		 }//calling shuffled method if the element of the shuffled array is greater than 50 to stop an index out of bounds error
-			   	   
-			   	   if(userValue > 21)
-			   	   {
-			   	   	  JOptionPane.showMessageDialog(null,"CardDealer wins as you have bust \n\nPress Deal to start a new hand" +"\nYou had: " + userValue,"Not This Time", JOptionPane.INFORMATION_MESSAGE);
-			   	   	  dealbtn.setVisible(true);
-			  		  stickbtn.setVisible(false);
-			  		  hitbtn.setVisible(false);
-			  		  stakebtn.setVisible(true);
-			  		  pot.gameFinished(dealer);
-			  		  infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
-			  		  infoHold.setText(dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
 
-                   }//checking user has bust before dealers has to take any cards
+
+                     isBust = winCheck.checkIfBust(userValue, dealer, cardPlayer, pot);
+
+
+                    if(isBust)
+                    {
+			   	   	   dealbtn.setVisible(true);
+			  		   stickbtn.setVisible(false);
+			  		   hitbtn.setVisible(false);
+			  		   stakebtn.setVisible(true);
+			  		   infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+			  		   infoHold.setText(dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
+
+                    }//checking user has bust before dealers has to take any cards
 			   	   
 			   	   
 			   	  
@@ -279,7 +297,8 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
                                 "please wait while we get more money to the table");
                         dealer.setBalance(dealer.getBalance() +(pot.getStake()*10));
 					}//changing dealer balances it will always be greater than stake placed
-				    ace =0;//reseting ace to zero  as its used as a counter t determine the value of an ace
+
+                    ace =0;//reseting ace to zero  as its used as a counter t determine the value of an ace
 					stakebtn.setVisible(false);
 					dealbtn.setVisible(false);
 					hitbtn.setVisible(true);
@@ -362,7 +381,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 				if (e.getSource() == stickbtn){
 						int k =0;
 
-						if(j >45)
+						if(j > 45)
 			   	   		{
 
 			   	   			shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();
@@ -411,7 +430,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 						crdholder2.revalidate();
 						crdholder2.repaint(); //the above two blocks of code remove the back of card image from screen and replace with two random card images
 							
-				   if(dealerValue < userValue && dealerValue < 21)
+				   if(dealerValue < userValue && dealerValue < winCheck.getBustValue())
 				   {
 					   	dcard3 = new ImageIcon(shuffled[j].getImage());
 						dealerCard3.setIcon(dcard3);
@@ -430,7 +449,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 
 						   }
 
-								if(dealerValue < userValue && dealerValue < 21)
+								if(dealerValue < userValue && dealerValue < winCheck.getBustValue())
 									{
 									  dcard4 = new ImageIcon(shuffled[j].getImage());
 									  dealerCard4.setIcon(dcard4);
@@ -449,7 +468,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 										}
 									  j++;//this block of code is adding new dealer card to screen
 									}//end of if statement
-										   	 if(dealerValue < userValue && dealerValue < 21)
+										   	 if(dealerValue < userValue && dealerValue < winCheck.getBustValue())
 											   {
 												   	dcard5 = new ImageIcon(shuffled[j].getImage());
 										  			dealerCard5.setIcon(dcard5);
@@ -473,43 +492,36 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 		    	}//end of nested if statement where dealer checks if user value i greater than dealers value and takes another card based on this
 		    	
 		    	
-		    	
-		    					if(dealerValue < 21 && dealerValue < userValue && k==5)
-									{
-									   	JOptionPane.showMessageDialog(null,"***Congratulations***\nYou win The CardDealer has " + dealerValue +" You have " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
-									   	dealbtn.setVisible(true);
-			  		 					hitbtn.setVisible(false);
-			  							stickbtn.setVisible(false);
-										pot.gameFinished(cardPlayer);
-									}// end of if statement checking if dealer has five cards and comparing users/dealers values
+
+
+
+
+				                winCheck.winLoseCheck(userValue, dealerValue, cardPlayer, dealer, pot);
+
+
+		    					//(dealerValue < 21 && dealerValue < userValue && k==5)
+								//	{
+								//	   	JOptionPane.showMessageDialog(null,"***Congratulations***\nYou win The CardDealer has " + dealerValue +" You have " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
+								//		pot.gameFinished(cardPlayer);
+								//	}// end of if statement checking if dealer has five cards and comparing users/dealers values
 			
-								if(dealerValue > 21)
-									{
-									   	JOptionPane.showMessageDialog(null,"***Congratulations***\nThe CardDealer has Bust\nYou win this Time" +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
-									   	dealbtn.setVisible(true);
-			  		 					hitbtn.setVisible(false);
-			  							stickbtn.setVisible(false);
-			  							pot.gameFinished(cardPlayer);
-									}// end of if staement checking if dealer has bust
-									
-								if(dealerValue > userValue && dealerValue <= 21)
-									{
-										JOptionPane.showMessageDialog(null,"***Conmiserations*** \nThe dealer wins with " + dealerValue +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
-										dealbtn.setVisible(true);
-			  							hitbtn.setVisible(false);
-			  		 					stickbtn.setVisible(false);
-										pot.gameFinished(dealer);
-									}//end of if statement comparing users and deales values
+								//(dealerValue > 21)
+								//	{
+								//	   	JOptionPane.showMessageDialog(null,"***Congratulations***\nThe CardDealer has Bust\nYou win this Time" +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
+			  					//		pot.gameFinished(cardPlayer);
+								//	}// end of if staement checking if dealer has bust
+								//
+								//(dealerValue > userValue && dealerValue <= 21)
+								//	{
+								//		JOptionPane.showMessageDialog(null,"***Conmiserations*** \nThe dealer wins with " + dealerValue +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
+								//		pot.gameFinished(dealer);
+								//	}//end of if statement comparing users and deales values
 								
-								if(dealerValue == userValue)
-									{
-									    JOptionPane.showMessageDialog(null,"unfortunatley its a tie as you had " + userValue +
-									    	" the dealer had " + dealerValue  ,"Results",JOptionPane.INFORMATION_MESSAGE);// message explaining this hand was a draw
-									    
-									    dealbtn.setVisible(true);//setting buttons visible and ot visible
-			  		  					hitbtn.setVisible(false);
-			  		 					stickbtn.setVisible(false);	
-									}// end of if statement checking for a draw
+								//(dealerValue == userValue)
+								//	{
+								//	    JOptionPane.showMessageDialog(null,"unfortunatley its a tie as you had " + userValue +
+								//	    	" the dealer had " + dealerValue  ,"Results",JOptionPane.INFORMATION_MESSAGE);// message explaining this hand was a draw
+								//	}
 
 
                                 infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
@@ -544,6 +556,7 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					
 					
 				}while(valid == false);//end of do while statement
+                
                 infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//
                 infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
                 usersHand.setText(cardPlayer.getName()+"'s Hand: ");//the three lines of code above are resetting text of user details, dealer details and stake incase of changes
@@ -556,8 +569,8 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					    MainMenuGUI.setBal(cardPlayer.getBalance());
 					    mainMenu.setVisible(true);
 						this.setVisible(false);
-						//pot.removeObserver(dealer); // removing from listener when game ends
-			      		pot.registerObserver(cardPlayer); // removing from listener when game ends
+						pot.removeObserver(dealer); // removing from listener when game ends
+			      		pot.removeObserver(cardPlayer); // removing from listener when game ends
 
 						
 			}//end of action performed Back
@@ -571,8 +584,8 @@ public BlackJackGUI(MainMenuGUI mainMenu){//passing in instance of mainmenuGUI t
 					{
 							
 							System.exit(0);
-							//pot.removeObserver(dealer); // removing from listener when game ends
-							pot.registerObserver(cardPlayer); // removing from listener when game ends
+							pot.removeObserver(dealer); // removing from listener when game ends
+							pot.removeObserver(cardPlayer); // removing from listener when game ends
 					}	
 				else
 					{

@@ -1,3 +1,3 @@
 public interface ShuffleBehaviour {
-    Card[] shuffleDeck();
+    PlayingCard[] shuffleDeck();
 }

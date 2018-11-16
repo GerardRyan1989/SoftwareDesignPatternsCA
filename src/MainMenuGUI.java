@@ -63,10 +63,18 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-    	table = new BlackJackGUI(this);//instaniating BlackJackGUI
+
 
 		if(e.getSource() == newGame)
 		{
+
+			String [] options = {"BlackJack", "FortyFive"};
+			String n = (String)JOptionPane.showInputDialog(null, "Please Choose which game you wish to play",
+					"Game Choice", JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+			System.out.print("\n\n\n" + n + " VLAUE RETURNED \n\n");
+
+
+			table = new BlackJackGUI(this , n); //instaniating BlackJackGUI
 
 			if(u1==null)
                 {
@@ -148,7 +156,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 		}//end of actionperformed New CardPlayer
 		if(e.getSource() == rulesOfGame){
 			
-			JOptionPane.showMessageDialog(null,"***Rules of BlackJack***\n\n1: Each person Starts with 2 cards.\n2:Hit-- CardPlayer takes another Card\n3:Stick--CardPlayer takes no more cards and sticks with current hand\n4:"
+			JOptionPane.showMessageDialog(null,"***Rules of BlackJack***\n\n1: Each person Starts with 2 cards.\n2:Hit-- CardPlayer takes another PlayingCard\n3:Stick--CardPlayer takes no more cards and sticks with current hand\n4:"
 				 + "Deal--  A new game of BlackJack is started\n5:Stake-- The amount of money the user wish to bet on each game(odds are Even) \n6: The maximum cards a player can have at any one time  is 5." +
 					"\n6: The winner is decided by hich hand has a greater value and/or if a hand is greater than 21 it results in a loss"+
 						" \n7: If the user has the same value as the dealer e.g. both the dealer and the user have  21, it will result in a split pot i.e both parties share the winnings");

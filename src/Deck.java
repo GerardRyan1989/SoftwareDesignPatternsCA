@@ -6,7 +6,7 @@ public class Deck{
 	private String suit="";       // card Suit
 	private String name="";       // card Name
 	//private int value =0, num =0; // value is int value of card,// num is increment each time in for loop and reaches a value of 51, this is used to get an imageIcon
-    private Card [] deck = new Card[52];// an  array to hold 52 cards in the order of 1 to 52
+    private PlayingCard[] deck = new PlayingCard[52];// an  array to hold 52 cards in the order of 1 to 52
 	private static Deck uniqueDeck;
 
 	private Deck(){ }
@@ -18,7 +18,7 @@ public class Deck{
 		return uniqueDeck;
 	}
 
-	public Card[] createDeck(){
+	public PlayingCard[] createDeck(){
 		int num = 0;
 		int value = 0;
 
@@ -82,7 +82,7 @@ public class Deck{
 		 		         value = 10;
 		 				break;
 		 	}//end of switch statement
-		 	deck[num] = new Card(name,suit,value,new ImageIcon("cards/"+(num+1)+".jpg"));//populating the array with cards
+		 	deck[num] = new PlayingCard(name,suit,value,new ImageIcon("cards/"+(num+1)+".jpg"));//populating the array with cards
 		 	
 		 	num++;//incrementing num so array will reach 52
 		 	

@@ -1,9 +1,9 @@
 public class Shuffle implements ShuffleBehaviour{
 
-    public Card [] shuffleDeck(){
+    public PlayingCard[] shuffleDeck(){
         Deck deck = Deck.getDeck();
-        Card[] shuffled = new Card[52];
-        Card[] newDeck =  deck.createDeck();
+        PlayingCard[] shuffled = new PlayingCard[52];
+        PlayingCard[] newDeck =  deck.createDeck();
         boolean [] check = new boolean[52];                             //this populates the shuffled deck in a random order with out any cards repeating
         for(int i = 0; i < 52; i++)										//it uses a boolean array of the same size as shuffled array which set to false
         {															//it generates a random number from 1 to 52 and if this element of the array matching the random number

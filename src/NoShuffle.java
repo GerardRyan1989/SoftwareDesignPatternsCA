@@ -1,7 +1,9 @@
-public class NoShuffle implements ShuffleBehaviour {
+import java.io.Serializable;
+
+public class NoShuffle implements ShuffleBehaviour, Serializable {
 
      //
-     public Card[] shuffleDeck(){
+     public PlayingCard[] shuffleDeck(){
          //return nothing
          return null;
      }
