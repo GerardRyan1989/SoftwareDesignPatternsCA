@@ -3,10 +3,9 @@ import javax.swing.*;
 
 public class Deck{
 
-	private String suit="";       // card Suit
-	private String name="";       // card Name
-	//private int value =0, num =0; // value is int value of card,// num is increment each time in for loop and reaches a value of 51, this is used to get an imageIcon
-    private PlayingCard[] deck = new PlayingCard[52];// an  array to hold 52 cards in the order of 1 to 52
+	private String suit="";
+	private String name="";
+    private PlayingCard[] deck = new PlayingCard[52];
 	private static Deck uniqueDeck;
 
 	private Deck(){ }

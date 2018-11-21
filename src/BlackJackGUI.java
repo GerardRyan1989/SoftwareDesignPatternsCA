@@ -5,37 +5,73 @@ import javax.swing.*;
 
 public class BlackJackGUI extends JFrame implements ActionListener {  // inheriting from JFrame Class and implenting the absract class/interface ActionListener
 	
-	private int i=0, j =0, f =0, ace =0;//declaring nts that will act as counntrs throughout the GUI
+	private int i=0;
+    private int j =0;
+    private int f =0;
+    private int ace =0;//declaring nts that will act as counntrs throughout the GUI
 	private double balance =0, dbalance =0;//declaring user and dealer balances set to default of 0
-	private  String name = "";//declaring username set to  a default of empty string
+	private String name = "";//declaring username set to  a default of empty string
 	private JMenuBar menu;//declarng Jmenubar to hold Jmenu
 	private JMenu file;//declaing Jmenu to hold JmenuItems
-	private JMenuItem exit, back;//Declaring JmenuItems  to exit from the system or go back to main menu
-	private JButton hitbtn, stickbtn, dealbtn, stakebtn;//declaring JButtons to be Used for game commands
-	private JLabel userCard1, userCard2, userCard3, userCard4, userCard5, usersHand,infoHold, infoHold2;//declaring Jpanels to hold (Jlabels with ImageIcons Attached) and also JLabels to hold text
-	private JLabel dealerCard1, dealerCard2, dealerCard3, dealerCard4, dealerCard5, dealersHand;//declaring Jpanels to hold (Jlabels with ImageIcons Attached)
-	private JPanel crdholder, crdholder2, btnholder, spaceholder, spaceholder2;//declaring Jpanels to hold (Jlabels with ImageIcons Attached)
-	private ImageIcon bcard, card1, card2, card3, card4, card5, dcard1, dcard2, dcard3, dcard4, dcard5;//declaring imageIcons to hold paths assigned to image lateer in program
+	private JMenuItem exit;
+    private JMenuItem back;//Declaring JmenuItems  to exit from the system or go back to main menu
+	private JButton hitbtn;
+    private JButton stickbtn;
+    private JButton dealbtn;
+    private JButton stakebtn;
+    private JButton changeGameModebtn;
+	private JLabel userCard1;
+    private JLabel userCard2;
+    private JLabel userCard3;
+    private JLabel userCard4;
+    private JLabel userCard5;
+    private JLabel usersHand;
+    private JLabel infoHold;
+    private JLabel infoHold2;//declaring Jpanels to hold (Jlabels with ImageIcons Attached) and also JLabels to hold text
+	private JLabel dealerCard1;
+    private JLabel dealerCard2;
+    private JLabel dealerCard3;
+    private JLabel dealerCard4;
+    private JLabel dealerCard5;
+    private JLabel dealersHand;//declaring Jpanels to hold (Jlabels with ImageIcons Attached)
+	private JPanel crdholder;
+    private JPanel crdholder2;
+    private JPanel btnholder;
+    private JPanel spaceholder;
+    private JPanel spaceholder2;//declaring Jpanels to hold (Jlabels with ImageIcons Attached)
+	private ImageIcon bcard;
+    private ImageIcon card1;
+    private ImageIcon card2;
+    private ImageIcon card3;
+    private ImageIcon card4;
+    private ImageIcon card5;
+    private ImageIcon dcard1;
+    private ImageIcon dcard2;
+    private ImageIcon dcard3;
+    private ImageIcon dcard4;
+    private ImageIcon dcard5;//declaring imageIcons to hold paths assigned to image lateer in program
 	private PlayingCard[] shuffled = new PlayingCard[52];// declaring a card array to hold 52 cards in a random sequence
-	private int userValue =0 , dealerValue=0;// declaring the values of users and dealers hand
-	//private double stake = 0;//declaring the stake attribute original value before the user alters it
-	CardDealer dealer;//declaring a dealer attribute
-	CardPlayer cardPlayer = new CardPlayer();
-	Deck deck;//declaring a deck attribute
+	private int userValue =0;
+    private int dealerValue=0;// declaring the values of users and dealers hand
+	private CardDealer dealer;//declaring a dealer attribute
+	private CardPlayer cardPlayer = new CardPlayer();
+	private Deck deck;//declaring a deck attribute
 	private MainMenuGUI mainMenu;// declaring a Main Menu Attribute
 	private PlayingCard[] shuffledDeck;
 	private Pot pot;
     private WinLoseCheck winCheck;
     private String chosenGame;
     private Boolean isBust;
+    private SwitchGameMode switchGame;
+
 
     public BlackJackGUI(MainMenuGUI mainMenu, String GameChoice){//passing in instance of mainmenuGUI to balckjack gui
 		super("BlackJack");
-		this.mainMenu = mainMenu;// setting mainmenu to Main
+		this.mainMenu = mainMenu;
 		pot = new Pot();
 		setSize(800,600);
 		setLocation(350,100);
-		setLayout(new GridLayout(5,1));//setting grid layout so 5 Jpanels can be addded
+		setLayout(new GridLayout(5,1));
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);// setting  a default close operation
 		Font font = new Font("Arial", Font.BOLD, 12);// instaisting font
 		back = new JMenuItem("Back");////instaniating jMenu items
@@ -61,9 +97,9 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 		userCard5  = new JLabel();
 		dealerCard1 = new JLabel();
 		dealerCard2 = new JLabel();
-		dealerCard3 =new JLabel();
-    	dealerCard4 =new JLabel();
-    	dealerCard5 =new JLabel();//instaniating jLabels to later hold ImageIcons
+		dealerCard3 = new JLabel();
+    	dealerCard4 = new JLabel();
+    	dealerCard5 = new JLabel();//instaniating jLabels to later hold ImageIcons
         Color custom = new Color(14, 96, 20);//instaniating a new color
 		usersHand = new JLabel();//insaniating a JLabel
         usersHand.setFont(font);//setting font of Jlabel
@@ -88,6 +124,7 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 		hitbtn = new JButton("Hit");
 		stickbtn = new JButton("Stick");
 		stakebtn = new JButton("Set Stake");//instaniating Jbuttons and giving them text values
+		changeGameModebtn = new JButton("Switch Game Modes");
 		Font font2 = new Font("Arial", Font.BOLD, 24);//instaniating a secong Font
 		dealbtn.setBackground(Color.white);
 		dealbtn.setForeground(Color.black);
@@ -101,6 +138,9 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 	    stakebtn.setBackground(Color.white);
 		stakebtn.setForeground(Color.black);
 		stakebtn.setFont(font2);//setting background , foregound colors and font of buttons
+		changeGameModebtn.setBackground(Color.white);
+		changeGameModebtn.setForeground(Color.black);
+		changeGameModebtn.setFont(font2);//setting background , foregound colors and font of buttons
 	    crdholder2.add(dealersHand);
 	    crdholder2.add(dealerCard1);
 	    crdholder2.add(dealerCard2);//adding details to let user know its dealers hand and also adding dealer card to Janel
@@ -116,17 +156,19 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 	    add(crdholder);//adding jpanel to gui
 	    spaceholder2.setBackground(custom);
 	    spaceholder2.add(infoHold2);//adding inforamtion about user name and balance and stake to Jpanel
-	    add(spaceholder2);//adding jpanel to gui
+	    add(spaceholder2);
 	    btnholder.add(stakebtn);
 	    btnholder.add(dealbtn);
 		btnholder.add(hitbtn);
-		btnholder.add(stickbtn);//adding buttons to Jpanel
+		btnholder.add(stickbtn);
+		btnholder.add(changeGameModebtn);
 		btnholder.setBackground(Color.black);//setting backgrounnd color of bthholder
 		add(btnholder);// adding the Jpanel Buton holder to the GUI
 		hitbtn.addActionListener(this);//adding actionlisteners
 		dealbtn.addActionListener(this);
 		stickbtn.addActionListener(this);
 		stakebtn.addActionListener(this);
+		changeGameModebtn.addActionListener(this);
 		stickbtn.setVisible(false);//setting to false as user wont need till stake is set
 		hitbtn.setVisible(false);//setting to false as user wont need till stake is set
 		dealbtn.setVisible(false);//setting to false as user wont need till stake is set
@@ -137,28 +179,28 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 		pot.registerObserver(dealer); // adding dealer to listener
 	    deck = Deck.getDeck(); // instaniaaiting a new deck
         infoHold.setText(dealer.getName() +" Balance: €" + dealer.getBalance());//setting text of dealers details
-        infoHold2.setText(cardPlayer.getName() +" Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//setting text of users deatails
+		infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
 	    shuffledDeck = dealer.shuffleBehaviour.shuffleDeck();//calling shuffeld deck method
         chosenGame = GameChoice;
-
+    	switchGame = new SwitchGameMode();
 
 		for(int i = 0; i < shuffled.length; i++)
 		{
 			shuffled[i] = shuffledDeck[i];
 		}//in here the shuffled array takes on the values of the deck.shuffled array
+
+
+		if(chosenGame.equals("BlackJack")){
+			winCheck = new WinLoseBlackJack();
+		}
+
+		if(chosenGame.equals("FortyFive")){
+			winCheck = new WinLoseFortyFive();
+		}
+
 	}//end of BlackJackgui Constructor
 
 		public void actionPerformed(ActionEvent e) {
-
-            if(chosenGame.equals("BlackJack")){
-                winCheck = new WinLoseTwentyOne();
-                winCheck.setBustValue(21);
-            }
-
-            if(chosenGame.equals("FortyFive")){
-                winCheck = new WinLoseFortyFive();
-                winCheck.setBustValue(45);
-            }
 
 			if (e.getSource() == hitbtn){
 					if(i == 0){
@@ -180,9 +222,10 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 						crdholder.add(userCard2);
 						userValue += shuffled[j].getValue();
 							if(shuffled[j].getName().equals("Ace"))
-								{
+							{
 									ace++;
-								}
+
+							}
 						
 						crdholder.revalidate();
 						crdholder.repaint();
@@ -265,13 +308,14 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 					   	   			{
 					   	   				shuffled[x] = shuffledDeck[x];
 					   	   			}
+
 			   	   		   JOptionPane.showMessageDialog(null,"The current deck in use is now empty....\n\n\nplease wait while the dealer shuffles a new deck");
 			   	   	
 			   	   			j=0;
 			   	  		 }//calling shuffled method if the element of the shuffled array is greater than 50 to stop an index out of bounds error
 
 
-                     isBust = winCheck.checkIfBust(userValue, dealer, cardPlayer, pot);
+					isBust = winCheck.checkIfBust(userValue, dealer, cardPlayer, pot);
 
 
                     if(isBust)
@@ -280,7 +324,9 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 			  		   stickbtn.setVisible(false);
 			  		   hitbtn.setVisible(false);
 			  		   stakebtn.setVisible(true);
-			  		   infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f",cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+			  		   changeGameModebtn.setVisible(true);
+						infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()) +
+								"\n you are now playing: " + winCheck.getGameName());//
 			  		   infoHold.setText(dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
 
                     }//checking user has bust before dealers has to take any cards
@@ -303,6 +349,7 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 					dealbtn.setVisible(false);
 					hitbtn.setVisible(true);
 			  		stickbtn.setVisible(false);
+			  		changeGameModebtn.setVisible(false);
 					userValue = 0;//reseting user and dealer vlues to zero
 			   	   	dealerValue = 0;
 
@@ -348,9 +395,9 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 			   	  		boolean valid = false;
 			   	  		do{
 			   	  		try{
-			   	  				int yesNO = 0;
-			   	  				yesNO =JOptionPane.showConfirmDialog(null,"Your balance does not\n cover your stake \n\n"+
-			   	  						"Would you like deposit Money","Insuffiecnt Funds",JOptionPane.YES_NO_OPTION);
+			   	  		        int yesNO= 0;
+			   	  				yesNO = JOptionPane.showConfirmDialog(null,"Your balance does not\n cover your stake \n\n"+
+			   	  						"Would you like deposit Money","Insufficient Funds",JOptionPane.YES_NO_OPTION);
 			   	  				if(yesNO == 0)
 			   	  					{
 			   	  						cardPlayer.updateBalance(Integer.parseInt(JOptionPane.showInputDialog(null,"how much would you like to deposit:")));
@@ -372,7 +419,8 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 			   	  		
 			   	  	}// end of if ststement so user cant bet more money than whats in their balance
 					i = 0;
-                    infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+				infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()) +
+						"\n you are now playing: " + winCheck.getGameName());//
                     infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));//these two lines are reseting  users/dealers detailson screen
 
             }//end of actionPerformed Deal Button
@@ -491,40 +539,12 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 				   
 		    	}//end of nested if statement where dealer checks if user value i greater than dealers value and takes another card based on this
 		    	
-		    	
-
-
 
 
 				                winCheck.winLoseCheck(userValue, dealerValue, cardPlayer, dealer, pot);
 
-
-		    					//(dealerValue < 21 && dealerValue < userValue && k==5)
-								//	{
-								//	   	JOptionPane.showMessageDialog(null,"***Congratulations***\nYou win The CardDealer has " + dealerValue +" You have " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
-								//		pot.gameFinished(cardPlayer);
-								//	}// end of if statement checking if dealer has five cards and comparing users/dealers values
-			
-								//(dealerValue > 21)
-								//	{
-								//	   	JOptionPane.showMessageDialog(null,"***Congratulations***\nThe CardDealer has Bust\nYou win this Time" +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
-			  					//		pot.gameFinished(cardPlayer);
-								//	}// end of if staement checking if dealer has bust
-								//
-								//(dealerValue > userValue && dealerValue <= 21)
-								//	{
-								//		JOptionPane.showMessageDialog(null,"***Conmiserations*** \nThe dealer wins with " + dealerValue +"\nYou had: " + userValue,"Results",JOptionPane.INFORMATION_MESSAGE);
-								//		pot.gameFinished(dealer);
-								//	}//end of if statement comparing users and deales values
-								
-								//(dealerValue == userValue)
-								//	{
-								//	    JOptionPane.showMessageDialog(null,"unfortunatley its a tie as you had " + userValue +
-								//	    	" the dealer had " + dealerValue  ,"Results",JOptionPane.INFORMATION_MESSAGE);// message explaining this hand was a draw
-								//	}
-
-
-                                infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));
+								infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()) +
+									"\n you are now playing: " + winCheck.getGameName());//
 								infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));//these two lines are reseting  users/dealers detailson screen
 
 
@@ -537,6 +557,7 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 					    dealbtn.setVisible(true);
 						hitbtn.setVisible(false);
 			  		    stickbtn.setVisible(false);
+						changeGameModebtn.setVisible(true);
 						
 						
 				}// end of actionPerformed stickbutton
@@ -557,7 +578,8 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 					
 				}while(valid == false);//end of do while statement
 
-                infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()));//
+                infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()) +
+						"\n you are now playing: " + winCheck.getGameName());//
                 infoHold.setText( dealer.getName() +" Balance: €" + String.format("%.2f", dealer.getBalance()));
                 usersHand.setText(cardPlayer.getName()+"'s Hand: ");//the three lines of code above are resetting text of user details, dealer details and stake incase of changes
 
@@ -592,7 +614,14 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 						  JOptionPane.showMessageDialog(null,"To save game go back to menu");
 					}				  
 			}// end of actionperformed Exit
-		}// end of actionPerformed statements
+
+			if(e.getSource() == changeGameModebtn){
+				winCheck = switchGame.SwitchGame(winCheck);
+			}
+		}
+
+
+
 	public void setCardPlayer(CardPlayer player)
 	{
 		cardPlayer = player;

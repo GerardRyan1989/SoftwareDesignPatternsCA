@@ -13,17 +13,24 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 	private ImageIcon blackjackBG = new ImageIcon("cards/background.jpg");//declaring ImageIcon and setting path to image
 	private JLabel 	backgroundImage;//deeclaring JLabel
 	private JMenuBar menuStrip; //Declaring JMenuBar to be added to gui further in Program
-	private JMenu file, play, register,info ;//Declaring Jmenus to add to JmenuBar
-	private JMenuItem newGame, loadGame, saveGame, newUser, exit, rulesOfGame;//declaring JmenuItems to add to Jmenu
+	private JMenu file;
+	private JMenu play;
+	private JMenu register;
+	private JMenu info ;
+	private JMenuItem newGame;
+	private JMenuItem loadGame;
+	private JMenuItem saveGame;
+	private JMenuItem newUser;
+	private JMenuItem exit;
+	private JMenuItem rulesOfGame;//declaring JmenuItems to add to Jmenu
 	private JPanel  backGround; //declaring Jpanel which is added togui furte in program
-	private	ArrayList <CardPlayer>users = new ArrayList<CardPlayer>();//Declaring an arraylist of type user that will be used to save and load files
+	private	ArrayList <CardPlayer> users = new ArrayList<CardPlayer>();//Declaring an arraylist of type user that will be used to save and load files
 	private BlackJackGUI table;
 		
 	public MainMenuGUI(){
 		super("Menu");
 		setSize(800,600);
 		setLocation(350,100);
-		//setLayout(new FlowLayout());
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		newGame = new JMenuItem("Play Game");//instainating JmenuItem
 		rulesOfGame = new JMenuItem("Rules of BlackJack");//instainating JmenuItem
@@ -74,11 +81,11 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 			System.out.print("\n\n\n" + n + " VLAUE RETURNED \n\n");
 
 
-			table = new BlackJackGUI(this , n); //instaniating BlackJackGUI
+			table = new BlackJackGUI(this , n);
 
 			if(u1==null)
                 {
-                    JOptionPane.showMessageDialog(null,"Please either load a user or register a new user");//error message
+                    JOptionPane.showMessageDialog(null,"Please either load a user or register a new user");
                 }
 			else	
 				{
@@ -161,6 +168,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 					"\n6: The winner is decided by hich hand has a greater value and/or if a hand is greater than 21 it results in a loss"+
 						" \n7: If the user has the same value as the dealer e.g. both the dealer and the user have  21, it will result in a split pot i.e both parties share the winnings");
 		}//end of action performed rules of game, Message dialog explaining rules of black jack
+
 		if(e.getSource() == exit)	
 		{
 			int x = JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","exit confimation",JOptionPane.YES_NO_OPTION);
@@ -217,7 +225,6 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 			u1.setName(users.get(gamenum).getName());
 			u1.setAge(users.get(gamenum).getAge());
 			u1.setBalance(users.get(gamenum).getBalance());//this block of code gets the details of an element determined by user input  from the arraylist,
-			table.setCardPlayer(u1);// and passes it to the BlackJackGUI
 		}// end of the actionperformed Loadgame
 	}//end of actionperformed
 	
@@ -229,7 +236,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 	public void addUser(){
       	users.remove(gamenum);
       	users.add(gamenum, u1); 
-      }//end of addUser
+	}//end of addUser
 	
 	public void save() throws IOException {
       		

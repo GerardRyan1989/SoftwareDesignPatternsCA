@@ -4,11 +4,12 @@ public abstract class WinLoseCheck implements WinLoseTemplate{
 
     Pot pot;
     private int bustValue;
-    private boolean isBust;
+    private String gameName;
+
     public final void winLoseCheck(int userValue, int dealerValue, CardPlayer cardPlayer, CardDealer dealer, Pot pot){
         this.pot = pot;
-        isBust = checkIfBust(dealerValue, cardPlayer, dealer, pot);
-        if(isBust == false){
+        boolean isBust = checkIfBust(dealerValue, cardPlayer, dealer, pot);
+        if(!isBust){
             returnWinner(checkHandsAgainstEachOther(userValue, dealerValue, cardPlayer,  dealer));
         }
 
@@ -34,6 +35,13 @@ public abstract class WinLoseCheck implements WinLoseTemplate{
 
     public int getBustValue(){
         return bustValue;
+    }
+
+    public void setGameName(String gameName){
+        this.gameName = gameName;
+    }
+    public String getGameName(){
+        return gameName;
     }
 
 }
