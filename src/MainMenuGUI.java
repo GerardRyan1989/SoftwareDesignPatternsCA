@@ -69,6 +69,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 		setVisible(true);//setting gui to visible
 		
 	}
+
 	public void actionPerformed(ActionEvent e) {
 
 
@@ -78,7 +79,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {// inheriting
 			String [] options = {"BlackJack", "FortyFive"};
 			String n = (String)JOptionPane.showInputDialog(null, "Please Choose which game you wish to play",
 					"Game Choice", JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-			System.out.print("\n\n\n" + n + " VLAUE RETURNED \n\n");
+			System.out.print("\n\n\n" + n + " Value Returned \n\n");
 
 
 			table = new BlackJackGUI(this , n);

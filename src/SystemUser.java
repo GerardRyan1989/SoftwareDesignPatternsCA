@@ -103,4 +103,15 @@ public abstract class SystemUser implements Serializable{
     public void setShuffleBehaviour(ShuffleBehaviour sb){
         this.shuffleBehaviour = sb;
     }
+
+    public void update(SystemUser winner,  double stake) {
+
+        if (this.getClass() == winner.getClass()) {
+            this.updateBalance(stake);
+        }
+
+        if (this.getClass() != winner.getClass()) {
+            this.updateBalance(-stake);
+        }
+    }
 }

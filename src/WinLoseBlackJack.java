@@ -41,7 +41,6 @@ public class WinLoseBlackJack extends WinLoseCheck{
         }
 
         return isBust;
-
         }
 }
 

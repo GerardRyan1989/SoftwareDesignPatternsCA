@@ -8,16 +8,7 @@ public class CardDealer extends SystemUser implements Observer{// inheriting fro
         setShuffleBehaviour(new Shuffle());
     }
 
-   public void update(SystemUser winner,  double stake) {
 
-        if(this.getClass() == winner.getClass()){
-            this.updateBalance(stake);
-        }
-
-        if(this.getClass() != winner.getClass()){
-            this.updateBalance(-stake);
-        }
-     }
 }
 
 

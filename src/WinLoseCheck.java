@@ -40,6 +40,7 @@ public abstract class WinLoseCheck implements WinLoseTemplate{
     public void setGameName(String gameName){
         this.gameName = gameName;
     }
+
     public String getGameName(){
         return gameName;
     }

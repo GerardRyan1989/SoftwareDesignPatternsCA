@@ -6,6 +6,7 @@ public class WinLoseFortyFive extends WinLoseCheck {
         this.setGameName("Fourty Five");
         this.setBustValue(45);
     }
+
     @Override
     public SystemUser checkHandsAgainstEachOther(int userValue, int dealerValue, SystemUser cardplayer, SystemUser dealer) {
 
@@ -39,8 +40,6 @@ public class WinLoseFortyFive extends WinLoseCheck {
             this.pot.gameFinished(Winner);
             isBust = true;
         }
-
-
 
         return isBust;
     }

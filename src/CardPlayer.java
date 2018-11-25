@@ -8,15 +8,5 @@ public class CardPlayer extends SystemUser implements Observer{
         setShuffleBehaviour(new NoShuffle());
     }
 
-    public void update(SystemUser winner,  double stake) {
-
-        if(this.getClass() == winner.getClass()){
-            this.updateBalance(stake);
-        }
-
-        if(this.getClass() != winner.getClass()){
-            this.updateBalance(-stake);
-        }
-    }
 }
 

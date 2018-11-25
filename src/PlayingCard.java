@@ -1,12 +1,16 @@
 import javax.swing.*;
 
-public class PlayingCard {
+public abstract class PlayingCard {
 	
-	private String name;
-	private String suit;
-	private int value;
-	private ImageIcon cardImage;
-	
+	protected String name;
+	protected String suit;
+	protected int value;
+	protected ImageIcon cardImage;
+
+	public PlayingCard(){
+
+	}
+
 	public PlayingCard(String name, String suit, int value, ImageIcon cardImage){
 		
 		this.name = name;
@@ -19,18 +23,22 @@ public class PlayingCard {
 	public String getName(){
 		return name;
 	}//returns the card name
-	
+
+	public void setSuit(String suit){
+		this.suit = suit;
+	}
+
 	public String getSuit(){
 		return suit;
-	}// returns the suit values of the card
-	
+	}
+
 	public int getValue(){
 		return value;
 	}// returns an int value of  the card value
 		
 	public String getImage(){
 		return cardImage.toString();
-	} // returns a string representation of an imageicon
+	} // returns a string representation of an image icon
 	
 	public String toString(){
 		return name + " " + suit + " " + value + " " + cardImage;
