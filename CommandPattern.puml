@@ -1,0 +1,39 @@
+@startuml
+
+interface Command{
+    +execute(): WinLoseCheck
+}
+
+class SetGameAsFortyFiveCommand {
+     -winLoseCheck: WinLoseCheck
+     +SetGameAsFortyFiveCommand()
+     +execute(): WinLoseCheck
+}
+
+
+class SetGameAsBlackJackCommand {
+    -winLoseCheck: WinLoseCheck
+    +SetGameAsBlackJackCommand()
+    +execute(): WinLoseCheck
+}
+
+class SwitchGameMode{
+    -winLoseBlackJack: WinLoseBlackJack
+    -winLoseFortyFive: WinLoseFortyFive
+    -fortyFive: SetGameAsFortyFiveCommand
+    -blackJack: SetGameAsBlackJackCommand
+    +SwitchGame(winLoseCheck: WinLoseCheck): WinLoseCheck
+}
+
+
+
+SetGameAsFortyFiveCommand ..> Command
+
+SetGameAsBlackJackCommand ..> Command
+
+
+SwitchGameMode --* SetGameAsFortyFiveCommand
+SwitchGameMode --* SetGameAsBlackJackCommand
+
+
+@enduml

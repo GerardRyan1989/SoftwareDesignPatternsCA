@@ -1,0 +1,13 @@
+@startuml
+
+
+class Deck{
+-suit: String
+-name: String
+-value: int
+ {static}Shuffled: Card[]
+ +Deck()
+ +ShuffledDeck()
+}
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+
+class User{
+-age: int
+-uName: String
+-balance: double
++User()
++User(uName: String, age: int, balance: double)
++setName(uName: String): void
++setAge(age: int): void
++setBalance(balance: double): void
++getName(): String
++getAge(): int
++getBalance(): double
++toString(): String
+
+}
+
+
+class Dealer{
+
+-name: String
+-balance: double
++Dealer()
++Dealer(name: String, balance: double)
++toString(): String
+
+}
+
+
+User <|--  Dealer
+
+
+
+
+@enduml

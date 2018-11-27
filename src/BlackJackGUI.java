@@ -620,8 +620,6 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 			}
 		}
 
-
-
 	public void setCardPlayer(CardPlayer player)
 	{
 		cardPlayer = player;

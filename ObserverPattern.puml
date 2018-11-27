@@ -1,0 +1,44 @@
+@startuml
+
+interface Observer{
+  +update(winner: SystemUser, stake: double); void
+}
+
+interface Subject{
+    +registerObserver(o: Observer): void
+    +removeObserver(o: Observer): void
+    +updateObservers(): void
+}
+
+
+class Pot{
+    -potSize: double
+    -stake: double
+    -winner: SystemUser
+    -observers: ArrayList
+    +Pot(): void
+    +registerObserver(o: Observer): void
+    +removeObserver(o: Observer): void
+    +updateObservers(): void
+    +setPotValues(stake: double): void
+    +gameFinished(winner: SystemUser): void
+    +setStake(stake: double): void
+    +getStake(): double
+}
+
+
+class CardPlayer{
+      +CardPlayer()
+}
+
+class CardDealer{
+      +CardDealer()
+}
+
+
+CardPlayer --|> Observer
+CardDealer --|> Observer
+
+
+Pot ..> Subject
+@enduml

@@ -1,19 +1,14 @@
-import javax.swing.*;
 import java.util.ArrayList;
 
 
 public class Deck{
 
-	//private String suit="";
-	//private String name="";
     private PlayingCard[] deck = new PlayingCard[52];
-
 	private DiamondCardStore diamonds;
 	private ClubCardStore clubs;
 	private SpadeCardStore spades;
 	private HeartCardStore hearts;
 	private ArrayList<PlayingCard> allSuits;
-
 	private static Deck uniqueDeck;
 
 	private Deck(){ }
@@ -46,5 +41,4 @@ public class Deck{
 
 		return deck;
 	}
-}//end of main
-
+}
