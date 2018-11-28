@@ -16,7 +16,7 @@ public class SingletonTest {
     public void SingletonTest() {
 
         Assert.assertTrue(Deck.getNumberofInstances() == 1);
-        Assert.assertFalse(Deck.getNumberofInstances() == 2);
+        Assert.assertFalse(Deck.getNumberofInstances() > 1);
 
     }
 }

@@ -1,8 +1,6 @@
 import org.junit.*;
 
-
 public class StrategyTest {
-
 
     private CardPlayer c1;
     private CardPlayer c2;
