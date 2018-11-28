@@ -2,45 +2,33 @@ import javax.swing.*;
 
 public class WinLoseFortyFive extends WinLoseCheck {
 
+    private SystemUser winner;
     public WinLoseFortyFive(){
-        this.setGameName("Fourty Five");
+        this.setGameName("Forty Five");
         this.setBustValue(45);
     }
 
+
+
     @Override
-    public SystemUser checkHandsAgainstEachOther(int userValue, int dealerValue, SystemUser cardplayer, SystemUser dealer) {
+    public SystemUser checkSpecialValues(int userValue, int dealerValue, SystemUser cardPlayer, SystemUser dealer, Pot pot ) {
+        this.pot = pot;
+        winner = null;
 
-        SystemUser winner = null;
-
-        if(dealerValue <= this.getBustValue() && dealerValue < userValue)
-        {
-            winner = cardplayer;
+        if (userValue == 35 && dealerValue != 35 ) {
+            winner = cardPlayer;
         }
 
-        if(dealerValue > userValue && dealerValue <= 45)
-        {
+        if (dealerValue == 35 && userValue != 35 ) {
             winner = dealer;
         }
 
-        if(dealerValue == userValue)
-        {
-           winner = null;
+        if(winner != null){
+            returnWinner(winner);
         }
 
         return winner;
+
     }
 
-    @Override
-    public boolean checkIfBust(int handValue, SystemUser Winner, SystemUser Bust, Pot pot) {
-        boolean isBust = false;
-
-        if(handValue > this.getBustValue()){
-            JOptionPane.showMessageDialog(null, Bust.getName() + " has Bust\n" + Winner.getName() + " wins this hand") ;
-            this.pot = pot;
-            this.pot.gameFinished(Winner);
-            isBust = true;
-        }
-
-        return isBust;
-    }
 }

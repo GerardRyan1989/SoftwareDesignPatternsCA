@@ -541,7 +541,7 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 		    	
 
 
-				                winCheck.winLoseCheck(userValue, dealerValue, cardPlayer, dealer, pot);
+				                winCheck.CheckWinners(userValue, dealerValue, cardPlayer, dealer, pot);
 
 								infoHold2.setText(cardPlayer.getName() +"'s Balance: €" + String.format("%.2f", cardPlayer.getBalance()) + " Stake €:" + String.format("%.2f", pot.getStake()) +
 									"\n you are now playing: " + winCheck.getGameName());//

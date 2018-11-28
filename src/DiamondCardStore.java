@@ -5,7 +5,7 @@ public class DiamondCardStore extends CardStore {
     ArrayList<PlayingCard> diamonds;
     DiamondPlayingCard card;
     @Override
-    ArrayList<PlayingCard> createCards() {
+    void createCards() {
         diamonds = new ArrayList<>();
 
         for(int i = 0; i < 13; i++){
@@ -55,6 +55,6 @@ public class DiamondCardStore extends CardStore {
             diamonds.add(card);
         }
 
-        return diamonds;
+        this.cards = diamonds;
     }
 }

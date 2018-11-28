@@ -8,7 +8,7 @@ public class ClubCardStore extends CardStore {
     private ClubPlayingCard card;
 
     @Override
-    ArrayList<PlayingCard> createCards() {
+    void createCards() {
         clubs = new ArrayList<>();
 
         for(int i = 0; i < 13; i++){
@@ -58,6 +58,7 @@ public class ClubCardStore extends CardStore {
             clubs.add(card);
         }
 
-        return clubs;
+        this.cards = clubs;
     }
+
 }

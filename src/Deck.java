@@ -10,13 +10,16 @@ public class Deck{
 	private HeartCardStore hearts;
 	private ArrayList<PlayingCard> allSuits;
 	private static Deck uniqueDeck;
+	private static int numberOfInstances = 0;
 
 	private Deck(){ }
 
 	public synchronized static Deck getDeck(){
 		if(uniqueDeck == null){
 			uniqueDeck = new Deck();
+			numberOfInstances++;
 		}
+
 		return uniqueDeck;
 	}
 
@@ -28,11 +31,15 @@ public class Deck{
 		spades = new SpadeCardStore();
 		diamonds  =new DiamondCardStore();
 
+		clubs.createCards();
+		hearts.createCards();
+		spades.createCards();
+		diamonds.createCards();
 
-		allSuits.addAll(clubs.createCards());
-		allSuits.addAll(hearts.createCards());
-		allSuits.addAll(spades.createCards());
-		allSuits.addAll(diamonds.createCards());
+		allSuits.addAll(clubs.getCards());
+		allSuits.addAll(hearts.getCards());
+		allSuits.addAll(spades.getCards());
+		allSuits.addAll(diamonds.getCards());
 
 		for(int i = 0; i < 52; i++){
 
@@ -40,5 +47,11 @@ public class Deck{
 		}
 
 		return deck;
+	}
+
+
+
+	public static int getNumberofInstances(){
+		return numberOfInstances;
 	}
 }

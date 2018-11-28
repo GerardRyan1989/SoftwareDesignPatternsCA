@@ -3,11 +3,10 @@ import java.util.*;
 
 public abstract class CardStore {
 
-    abstract ArrayList<PlayingCard> createCards();
+    ArrayList<PlayingCard> cards = new ArrayList<>();
+    abstract void createCards();
 
-    public ArrayList<PlayingCard> getCards(){
-
-        ArrayList<PlayingCard> cards = createCards();
+    ArrayList<PlayingCard> getCards(){
 
         return cards;
     }

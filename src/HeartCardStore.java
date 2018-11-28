@@ -5,7 +5,7 @@ public class HeartCardStore extends CardStore {
     ArrayList<PlayingCard> hearts;
     HeartPlayingCard card;
     @Override
-    ArrayList<PlayingCard> createCards() {
+    void createCards() {
         hearts = new ArrayList<>();
 
         for(int i = 0; i < 13; i++){
@@ -55,6 +55,6 @@ public class HeartCardStore extends CardStore {
             hearts.add(card);
         }
 
-        return hearts;
+        this.cards = hearts;
     }
 }

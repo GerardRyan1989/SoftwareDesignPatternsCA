@@ -6,7 +6,7 @@ public class SpadeCardStore extends CardStore {
     ArrayList<PlayingCard> spades;
     SpadePlayingCard card;
     @Override
-    ArrayList<PlayingCard> createCards() {
+    void  createCards() {
         spades = new ArrayList<>();
 
         for(int i = 0; i < 13; i++){
@@ -56,6 +56,6 @@ public class SpadeCardStore extends CardStore {
             spades.add(card);
         }
 
-        return spades;
+        this.cards = spades;
     }
 }

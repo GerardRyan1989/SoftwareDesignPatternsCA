@@ -56,7 +56,6 @@ public abstract class SystemUser implements Serializable{
 
 
     public double getBalance(){
-
         return balance;
     }
 
