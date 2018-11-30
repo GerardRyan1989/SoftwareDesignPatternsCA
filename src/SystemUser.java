@@ -3,11 +3,8 @@ import java.io.*;
 public abstract class SystemUser implements Serializable{
 
     private int age;
-
     private String name;
-
     private double balance;
-
     ShuffleBehaviour shuffleBehaviour;
 
     public SystemUser(){
@@ -25,21 +22,17 @@ public abstract class SystemUser implements Serializable{
         this.balance = balance;
     }
 
-
     public void setName(String uName){
         this.name = uName;
     }
-
 
     public void setAge(int age){
         this.age = age;
     }
 
-
     public void setBalance(double balance){
         this.balance = balance;
     }
-
 
     public void updateBalance(double updateAmount){
         this.balance += updateAmount;
@@ -54,15 +47,13 @@ public abstract class SystemUser implements Serializable{
         return age;
     }
 
-
-    public double getBalance(){
+    protected double getBalance(){
         return balance;
     }
 
     public String toString(){
         return name + " " + age + " €" + String.format("%.2f",balance);
     }
-
 
     public void setShuffleBehaviour(ShuffleBehaviour sb){
         this.shuffleBehaviour = sb;

@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.lang.reflect.Field;
 
 public abstract class WinLoseCheck implements WinLoseTemplate{
 

@@ -1,5 +1,35 @@
 @startuml
 
+abstract class WinLoseCheck{
+        pot: Pot
+        -bustValue: int
+        -gameName: String
+        +winLoseCheck(userValue: int, dealerValue: int, cardPlayer CardPlayer,
+            cardDealer CardDealer, pot: Pot): void
+        +returnWinner(systemUser SystemUser): void
+        {abstract}+checkIfBust(handValue: int, winner SystemUser, bust SystemUser,
+            Pot pot): boolean
+        +setBustValue(bustValue: int): void
+        +getBustValue(): int
+        +setGameName(gameName: String): void
+        +getGameName(): String
+
+}
+
+class WinLoseBlackJack{
+    +WinLoseBlackJack()
+    +checkSpecialvalue(userValue: int, dealerValue int,
+        cardPlayer SystemUser, dealer: SystemUser, pot Pot); SystemUser
+}
+
+
+class WinLoseFortyFive{
+    +WinLoseFortyFive()
+    +checkSpecialvalue(userValue: int, dealerValue int,
+    cardPlayer SystemUser, dealer: SystemUser, pot Pot); SystemUser
+}
+
+
 interface Command{
     +execute(): WinLoseCheck
 }
@@ -32,8 +62,13 @@ SetGameAsFortyFiveCommand ..> Command
 SetGameAsBlackJackCommand ..> Command
 
 
+SwitchGameMode --|> WinLoseCheck
 SwitchGameMode --* SetGameAsFortyFiveCommand
 SwitchGameMode --* SetGameAsBlackJackCommand
+SwitchGameMode --* WinLoseFortyFive
+SwitchGameMode --* WinLoseBlackJack
+WinLoseBlackJack --|> WinLoseCheck
+WinLoseFortyFive --|> WinLoseCheck
 
 
 @enduml

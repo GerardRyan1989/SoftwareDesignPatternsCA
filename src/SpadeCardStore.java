@@ -3,13 +3,13 @@ import java.util.*;
 
 public class SpadeCardStore extends CardStore {
 
-    ArrayList<PlayingCard> spades;
-    SpadePlayingCard card;
+    private ArrayList<PlayingCard> spades;
+    private SpadePlayingCard card;
     @Override
     void  createCards() {
         spades = new ArrayList<>();
 
-        for(int i = 0; i < 13; i++){
+        for(int i = 0; i < getNUmOfCardsPerSuit(); i++){
 
             switch(i){
                 case 0:

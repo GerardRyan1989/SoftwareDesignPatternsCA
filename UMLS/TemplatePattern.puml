@@ -22,13 +22,15 @@ abstract class WinLoseCheck{
 
 
 class WinLoseFortyFive{
-    +checkHandsAgainstEachOther(userValue: int, dealerValue: int, cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
-    +checkIfBust(handValue: int, winner SystemUser, bust SystemUser, Pot pot): boolean
+    +checkHandsAgainstEachOther(userValue: int, dealerValue: int,
+        cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
+    +checkIfBust(handValue: int, winner SystemUser, bust SystemUser,  Pot pot): boolean
 }
 
 
 class WinLoseBlackJack{
-    +checkHandsAgainstEachOther(userValue: int, dealerValue: int, cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
+    +checkHandsAgainstEachOther(userValue: int, dealerValue: int,
+        cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
     +checkIfBust(handValue: int, winner SystemUser, bust SystemUser, Pot pot): boolean
 }
 

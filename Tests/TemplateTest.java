@@ -8,6 +8,7 @@ public class TemplateTest {
     private int playerValue;
     private int dealerValue;
     private WinLoseCheck winLose;
+
     @Before
     public void setUp(){
         player = new CardPlayer();
@@ -24,20 +25,20 @@ public class TemplateTest {
     }
 
     @Test
-    public void TemplateTest(){
+    public void testTemplate(){
 
         winLose.CheckWinners(playerValue, dealerValue, player, dealer, pot);
 
-        Assert.assertTrue(player.getBalance() == 5500);
-        Assert.assertTrue(dealer.getBalance() == 4500);
+        Assert.assertEquals(5500, player.getBalance(), 0.0);
+        Assert.assertEquals(4500, dealer.getBalance(), 0.0);
 
 
         playerValue = 36;
         dealerValue = 40;
         winLose.CheckWinners(playerValue, dealerValue, player, dealer, pot);
 
-        Assert.assertTrue(player.getBalance() == 5000);
-        Assert.assertTrue(dealer.getBalance() == 5000);
+        Assert.assertEquals(5000, player.getBalance(), 0.0);
+        Assert.assertEquals(5000, dealer.getBalance(), 0.0);
 
         winLose = new WinLoseBlackJack();
 
@@ -45,16 +46,16 @@ public class TemplateTest {
         dealerValue = 20;
         winLose.CheckWinners(playerValue, dealerValue, player, dealer, pot);
 
-        Assert.assertTrue(player.getBalance() == 5500);
-        Assert.assertTrue(dealer.getBalance() == 4500);
+        Assert.assertEquals(5500, player.getBalance(), 0.0);
+        Assert.assertEquals(4500, dealer.getBalance(), 0.0);
 
 
         playerValue = 16;
         dealerValue = 35;
         winLose.CheckWinners(playerValue, dealerValue, player, dealer, pot);
 
-        Assert.assertTrue(player.getBalance() == 6000);
-        Assert.assertTrue(dealer.getBalance() == 4000);
+        Assert.assertEquals(6000, player.getBalance(), 0.0);
+        Assert.assertEquals(4000, dealer.getBalance(), 0.0);
     }
 
 }

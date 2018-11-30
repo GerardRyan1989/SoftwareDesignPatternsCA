@@ -7,11 +7,12 @@ public class ClubCardStore extends CardStore {
     private ArrayList<PlayingCard> clubs;
     private ClubPlayingCard card;
 
+
     @Override
     void createCards() {
         clubs = new ArrayList<>();
 
-        for(int i = 0; i < 13; i++){
+        for(int i = 0; i < getNUmOfCardsPerSuit() ; i++){
 
             switch(i){
                 case 0:
@@ -60,5 +61,6 @@ public class ClubCardStore extends CardStore {
 
         this.cards = clubs;
     }
+
 
 }

@@ -8,8 +8,6 @@ public class WinLoseFortyFive extends WinLoseCheck {
         this.setBustValue(45);
     }
 
-
-
     @Override
     public SystemUser checkSpecialValues(int userValue, int dealerValue, SystemUser cardPlayer, SystemUser dealer, Pot pot ) {
         this.pot = pot;

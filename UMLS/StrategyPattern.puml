@@ -46,19 +46,16 @@ abstract class SystemUser{
 
 }
 
-
-CardPlayer --|> SystemUser
-CardDealer--|> SystemUser
-
+SystemUser --* ShuffleBehaviour
 
 Shuffle ..> ShuffleBehaviour
 NoShuffle ..> ShuffleBehaviour
 
-
-SystemUser --* ShuffleBehaviour
-
 CardPlayer --* NoShuffle
 
 CardDealer --* Shuffle
+
+CardPlayer --|> SystemUser
+CardDealer --|> SystemUser
 
 @enduml

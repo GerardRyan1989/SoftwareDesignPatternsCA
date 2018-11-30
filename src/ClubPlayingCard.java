@@ -8,6 +8,4 @@ public class ClubPlayingCard extends PlayingCard {
         this.name = name;
         this.cardImage = cardImage;
     }
-
-
 }

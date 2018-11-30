@@ -25,18 +25,18 @@ public class StrategyTest {
     }
 
     @Test
-    public void StrategyTest(){
+    public void testStrategy(){
 
-        Assert.assertTrue(c1.getName().equals("Gerard Ryan"));
-        Assert.assertTrue(c1.getAge() == 25);
-        Assert.assertTrue(c1.getBalance() == 150.00);
-        Assert.assertFalse(c1.shuffleBehaviour.shuffleDeck() == noShuffle.shuffleDeck());
+        Assert.assertEquals("Gerard Ryan", c1.getName());
+        Assert.assertEquals(25, c1.getAge());
+        Assert.assertEquals(150.00, c1.getBalance(), 0.0);
+        Assert.assertNotSame(c1.shuffleBehaviour.shuffleDeck(), noShuffle.shuffleDeck());
 
-        Assert.assertTrue(c2.getName().equals("John Jones"));
-        Assert.assertTrue(c2.getAge() == 19);
-        Assert.assertTrue(c2.getBalance() == 175.00);
-        Assert.assertTrue(c2.shuffleBehaviour.shuffleDeck() == noShuffle.shuffleDeck());
-        Assert.assertFalse(c2.shuffleBehaviour.shuffleDeck() == shuffle.shuffleDeck());
+        Assert.assertEquals("John Jones", c2.getName());
+        Assert.assertEquals(19, c2.getAge());
+        Assert.assertEquals(175.00, c2.getBalance(), 0.0);
+        Assert.assertSame(c2.shuffleBehaviour.shuffleDeck(), noShuffle.shuffleDeck());
+        Assert.assertNotSame(c2.shuffleBehaviour.shuffleDeck(), shuffle.shuffleDeck());
 
     }
 }

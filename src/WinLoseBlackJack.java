@@ -10,7 +10,6 @@ public class WinLoseBlackJack extends WinLoseCheck{
 
     @Override
     public SystemUser checkSpecialValues(int userValue, int dealerValue, SystemUser cardplayer, SystemUser dealer, Pot pot) {
-        //do nothing
         return null;
     }
 

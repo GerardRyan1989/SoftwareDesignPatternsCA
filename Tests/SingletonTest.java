@@ -13,9 +13,9 @@ public class SingletonTest {
     }
 
     @Test
-    public void SingletonTest() {
+    public void testSingleton() {
 
-        Assert.assertTrue(Deck.getNumberofInstances() == 1);
+        Assert.assertEquals(1, Deck.getNumberofInstances());
         Assert.assertFalse(Deck.getNumberofInstances() > 1);
 
     }

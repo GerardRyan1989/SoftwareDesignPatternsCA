@@ -2,13 +2,15 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class DiamondCardStore extends CardStore {
-    ArrayList<PlayingCard> diamonds;
-    DiamondPlayingCard card;
+
+    private ArrayList<PlayingCard> diamonds;
+    private DiamondPlayingCard card;
+
     @Override
     void createCards() {
         diamonds = new ArrayList<>();
 
-        for(int i = 0; i < 13; i++){
+        for(int i = 0; i < getNUmOfCardsPerSuit(); i++){
 
             switch(i){
                 case 0:

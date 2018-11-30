@@ -51,19 +51,23 @@
  }
 
  class ClubPlayingCard{
-    +ClubPlayingCard(value: int, name: String, cardImage, ImageIcon)
+    +ClubPlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
  }
 
  class HeartPlayingCard{
-    +HeartPlayingCard(value: int, name: String, cardImage, ImageIcon)
+    +HeartPlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
  }
 
  class DiamondPlayingCard{
-    +DiamondPlayingCard(value: int, name: String, cardImage, ImageIcon)
+    +DiamondPlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
  }
 
  class SpadePlayingCard{
-    +SpadePlayingCard(value: int, name: String, cardImage, ImageIcon)
+    +SpadePlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
  }
 
 

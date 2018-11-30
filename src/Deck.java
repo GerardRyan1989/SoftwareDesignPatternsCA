@@ -14,7 +14,7 @@ public class Deck{
 
 	private Deck(){ }
 
-	public synchronized static Deck getDeck(){
+	public static Deck getDeck(){
 		if(uniqueDeck == null){
 			uniqueDeck = new Deck();
 			numberOfInstances++;

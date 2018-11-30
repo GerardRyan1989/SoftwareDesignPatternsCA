@@ -23,11 +23,11 @@ public class CommandTest {
         winLoseCheckOne = switchGameMode.SwitchGame(winLoseCheckOne);
         winLoseCheckTwo = switchGameMode.SwitchGame(winLoseCheckTwo);
 
-        Assert.assertTrue(winLoseCheckOne.getBustValue() == fortyFive.getBustValue());
-        Assert.assertFalse(winLoseCheckOne.getBustValue() == blackJack.getBustValue());
+        Assert.assertEquals(winLoseCheckOne.getBustValue(), fortyFive.getBustValue());
+        Assert.assertNotEquals(winLoseCheckOne.getBustValue(), blackJack.getBustValue());
 
-        Assert.assertTrue(winLoseCheckTwo.getBustValue() == blackJack.getBustValue());
-        Assert.assertFalse(winLoseCheckTwo.getBustValue() == fortyFive.getBustValue());
+        Assert.assertEquals(winLoseCheckTwo.getBustValue(), blackJack.getBustValue());
+        Assert.assertNotEquals(winLoseCheckTwo.getBustValue(), fortyFive.getBustValue());
 
     }
 }

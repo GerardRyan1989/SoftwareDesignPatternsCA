@@ -29,19 +29,19 @@ public class ObserverTest {
     }
 
     @Test
-    public synchronized void ObserverTest(){
+    public synchronized void testObserver(){
         pot.gameFinished(c1);
 
 
-        Assert.assertTrue(c1.getBalance() == 225.00);
-        Assert.assertTrue(c2.getBalance() == 100.00);
+        Assert.assertEquals(225.00, c1.getBalance(), 0.0);
+        Assert.assertEquals(100.00, c2.getBalance(), 0.0);
 
         pot.gameFinished(c2);
         pot.gameFinished(c2);
 
 
-        Assert.assertTrue(c1.getBalance() == 75.00);
-        Assert.assertTrue(c2.getBalance()== 250.00);
+        Assert.assertEquals(75.00, c1.getBalance(), 0.0);
+        Assert.assertEquals(250.00, c2.getBalance(), 0.0);
 
 
     }

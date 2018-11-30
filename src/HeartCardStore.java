@@ -2,13 +2,14 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class HeartCardStore extends CardStore {
-    ArrayList<PlayingCard> hearts;
-    HeartPlayingCard card;
+    private ArrayList<PlayingCard> hearts;
+    private HeartPlayingCard card;
+
     @Override
     void createCards() {
         hearts = new ArrayList<>();
 
-        for(int i = 0; i < 13; i++){
+        for(int i = 0; i < getNUmOfCardsPerSuit() ; i++){
 
             switch(i){
                 case 0:

@@ -7,7 +7,7 @@ Class Deck{
     -spades: SpadeCardStore
     -hearts: HeartCardStore
     -allSuits: ArrayList<PlayingCard>
-    {static} -uniqueDeck: Deck
+    {static} uniqueDeck: Deck
 
 
     -Deck()

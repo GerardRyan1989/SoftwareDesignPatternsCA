@@ -76,7 +76,7 @@ public class BlackJackGUI extends JFrame implements ActionListener {  // inherit
 		Font font = new Font("Arial", Font.BOLD, 12);// instaisting font
 		back = new JMenuItem("Back");////instaniating jMenu items
 		exit = new JMenuItem("Exit");//instaniating jMenu items
-		file = new JMenu("file");// instaniatinn Jmenu file
+		file = new JMenu("file");// instaniating Jmenu file
 		exit.addActionListener(this);
 		back.addActionListener(this);
 		file.add(back);//adding jmenuItem to Jmenu

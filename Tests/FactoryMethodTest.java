@@ -2,6 +2,7 @@ import org.junit.*;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("Duplicates")
 public class FactoryMethodTest {
 
     private DiamondCardStore diamonds;
@@ -12,10 +13,11 @@ public class FactoryMethodTest {
     private ArrayList<PlayingCard> spadesList;
     private ArrayList<PlayingCard> diamondsList;
     private ArrayList<PlayingCard> heartsList;
-    private int numOfCardsInASuite;
+    private final int NUMOFCARDSINASUITE = 13;
 
     @Before
-    public void setUp() {
+    private void setUp() {
+
             clubsList = new ArrayList<>();
             spadesList = new ArrayList<>();
             heartsList = new ArrayList<>();
@@ -35,8 +37,6 @@ public class FactoryMethodTest {
             clubsList.addAll(clubs.getCards());
             spadesList.addAll(spades.getCards());
             diamondsList.addAll(diamonds.getCards());
-
-            numOfCardsInASuite = 13;
     }
 
     @Test
@@ -46,19 +46,17 @@ public class FactoryMethodTest {
         for(int i = 0; i < 13; i++){
 
 
-              Assert.assertTrue(heartsList.get(i).getSuit().equals("Heart"));
-              Assert.assertTrue(clubsList.get(i).getSuit().equals("Club"));
-              Assert.assertTrue(spadesList.get(i).getSuit().equals("Spade"));
-              Assert.assertTrue(diamondsList.get(i).getSuit().equals("Diamond"));
+            Assert.assertEquals("Heart", heartsList.get(i).getSuit());
+            Assert.assertEquals("Club", clubsList.get(i).getSuit());
+            Assert.assertEquals("Spade", spadesList.get(i).getSuit());
+            Assert.assertEquals("Diamond", diamondsList.get(i).getSuit());
 
         }
 
-        Assert.assertTrue(heartsList.size() == numOfCardsInASuite);
-        Assert.assertTrue(spadesList.size() == numOfCardsInASuite);
-        Assert.assertTrue(diamondsList.size() == numOfCardsInASuite);
-        Assert.assertTrue(clubsList.size() == numOfCardsInASuite);
-
-
+        Assert.assertEquals(heartsList.size(), NUMOFCARDSINASUITE);
+        Assert.assertEquals(spadesList.size(), NUMOFCARDSINASUITE);
+        Assert.assertEquals(diamondsList.size(), NUMOFCARDSINASUITE);
+        Assert.assertEquals(clubsList.size(), NUMOFCARDSINASUITE);
 
 
     }
