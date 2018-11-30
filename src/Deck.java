@@ -4,13 +4,14 @@ import java.util.ArrayList;
 public class Deck{
 
     private PlayingCard[] deck = new PlayingCard[52];
-	private DiamondCardStore diamonds;
-	private ClubCardStore clubs;
-	private SpadeCardStore spades;
-	private HeartCardStore hearts;
+	private DiamondSuit diamonds;
+	private ClubSuit clubs;
+	private SpadeSuit spades;
+	private HeartSuit hearts;
 	private ArrayList<PlayingCard> allSuits;
 	private static Deck uniqueDeck;
 	private static int numberOfInstances = 0;
+	private final int DeckSize = 52;
 
 	private Deck(){ }
 
@@ -26,10 +27,10 @@ public class Deck{
 	public PlayingCard[] createDeck(){
 
 		allSuits = new ArrayList<>();
-		clubs = new ClubCardStore();
-		hearts = new HeartCardStore();
-		spades = new SpadeCardStore();
-		diamonds  =new DiamondCardStore();
+		clubs = new ClubSuit();
+		hearts = new HeartSuit();
+		spades = new SpadeSuit();
+		diamonds  =new DiamondSuit();
 
 		clubs.createCards();
 		hearts.createCards();
@@ -41,7 +42,7 @@ public class Deck{
 		allSuits.addAll(spades.getCards());
 		allSuits.addAll(diamonds.getCards());
 
-		for(int i = 0; i < 52; i++){
+		for(int i = 0; i < DeckSize ; i++){
 
 			deck[i] = allSuits.get(i);
 		}

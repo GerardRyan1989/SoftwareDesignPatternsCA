@@ -32,7 +32,7 @@ public abstract class WinLoseCheck implements WinLoseTemplate{
             winner = cardplayer;
         }
 
-        if(dealerValue > userValue && dealerValue <= 45)
+        if(dealerValue > userValue && dealerValue <= this.getBustValue())
         {
             winner = dealer;
         }

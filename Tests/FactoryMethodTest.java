@@ -1,14 +1,13 @@
 import org.junit.*;
-
 import java.util.ArrayList;
 
-@SuppressWarnings("Duplicates")
+
 public class FactoryMethodTest {
 
-    private DiamondCardStore diamonds;
-    private ClubCardStore clubs;
-    private SpadeCardStore spades;
-    private HeartCardStore hearts;
+    private DiamondSuit diamonds;
+    private ClubSuit clubs;
+    private SpadeSuit spades;
+    private HeartSuit hearts;
     private ArrayList<PlayingCard> clubsList;
     private ArrayList<PlayingCard> spadesList;
     private ArrayList<PlayingCard> diamondsList;
@@ -23,10 +22,10 @@ public class FactoryMethodTest {
             heartsList = new ArrayList<>();
             diamondsList = new ArrayList<>();
 
-            diamonds = new DiamondCardStore();
-            clubs = new ClubCardStore();
-            spades = new SpadeCardStore();
-            hearts = new HeartCardStore();
+            diamonds = new DiamondSuit();
+            clubs = new ClubSuit();
+            spades = new SpadeSuit();
+            hearts = new HeartSuit();
 
             diamonds.createCards();
             clubs.createCards();
@@ -43,7 +42,7 @@ public class FactoryMethodTest {
     public synchronized void factoryMethodTest() {
 
 
-        for(int i = 0; i < 13; i++){
+        for(int i = 0; i < NUMOFCARDSINASUITE; i++){
 
 
             Assert.assertEquals("Heart", heartsList.get(i).getSuit());
@@ -57,7 +56,6 @@ public class FactoryMethodTest {
         Assert.assertEquals(spadesList.size(), NUMOFCARDSINASUITE);
         Assert.assertEquals(diamondsList.size(), NUMOFCARDSINASUITE);
         Assert.assertEquals(clubsList.size(), NUMOFCARDSINASUITE);
-
 
     }
 }

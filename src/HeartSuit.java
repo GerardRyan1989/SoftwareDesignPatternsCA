@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class HeartCardStore extends CardStore {
+public class HeartSuit extends CardSuit {
     private ArrayList<PlayingCard> hearts;
     private HeartPlayingCard card;
 

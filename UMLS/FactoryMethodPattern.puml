@@ -1,34 +1,34 @@
 @startuml
 
 
- abstract class CardStore{
+ abstract class CardSuit{
     {abstract}createCards(): ArrayList<PlayingCard>
     +getCards(): ArrayList<PlayingCard>
  }
 
 
- Class ClubCardStore{
+ Class ClubSuit{
     -clubs: ArrayList<PlayingCard>
     -card: ClubPlayingCard
     CreateCards(): ArrayList<PlayingCard>
  }
 
 
- Class DiamondCardStore{
+ Class DiamondSuit{
     -diamonds: ArrayList<PlayingCard>
     -card: DiamondPlayingCard
     CreateCards(): ArrayList<PlayingCard>
  }
 
 
- Class HeartCardStore{
+ Class HeartSuit{
     -hearts: ArrayList<PlayingCard>
     -card: HeartPlayingCard
     CreateCards(): ArrayList<PlayingCard>
  }
 
 
- Class SpadeCardStore{
+ Class SpadeSuit{
     -spades: ArrayList<PlayingCard>
     -card: SpadePlayingCard
     CreateCards(): ArrayList<PlayingCard>
@@ -76,16 +76,16 @@
  DiamondPlayingCard --|> PlayingCard
  SpadePlayingCard --|> PlayingCard
 
- ClubCardStore --* ClubPlayingCard
- HeartCardStore --* HeartPlayingCard
- DiamondCardStore --* DiamondPlayingCard
- SpadeCardStore --* SpadePlayingCard
+ ClubSuit --* ClubPlayingCard
+ HeartSuit --* HeartPlayingCard
+ DiamondSuit --* DiamondPlayingCard
+ SpadeSuit --* SpadePlayingCard
 
 
- ClubCardStore --|> CardStore
- DiamondCardStore --|> CardStore
- HeartCardStore --|> CardStore
- SpadeCardStore --|> CardStore
+ ClubSuit --|> CardSuit
+ DiamondSuit --|> CardSuit
+ HeartSuit --|> CardSuit
+ SpadeSuit --|> CardSuit
 
 
 

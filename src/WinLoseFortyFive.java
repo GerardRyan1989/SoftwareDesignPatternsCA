@@ -3,6 +3,7 @@ import javax.swing.*;
 public class WinLoseFortyFive extends WinLoseCheck {
 
     private SystemUser winner;
+    private final int WIN_LOSE_SPECIAL_VALUE = 35;
     public WinLoseFortyFive(){
         this.setGameName("Forty Five");
         this.setBustValue(45);
@@ -13,11 +14,11 @@ public class WinLoseFortyFive extends WinLoseCheck {
         this.pot = pot;
         winner = null;
 
-        if (userValue == 35 && dealerValue != 35 ) {
+        if (userValue == WIN_LOSE_SPECIAL_VALUE  && dealerValue != WIN_LOSE_SPECIAL_VALUE  ) {
             winner = cardPlayer;
         }
 
-        if (dealerValue == 35 && userValue != 35 ) {
+        if (dealerValue == WIN_LOSE_SPECIAL_VALUE && userValue != WIN_LOSE_SPECIAL_VALUE  ) {
             winner = dealer;
         }
 

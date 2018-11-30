@@ -2,10 +2,10 @@
 
 Class Deck{
     -deck: PlayingCard[]
-    -diamonds: DiamondCardStore
-    -clubs: ClubCardStore
-    -spades: SpadeCardStore
-    -hearts: HeartCardStore
+    -diamonds: DiamondSuit
+    -clubs: ClubSuit
+    -spades: SpadeSuit
+    -hearts: HeartSuit
     -allSuits: ArrayList<PlayingCard>
     {static} uniqueDeck: Deck
 

@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.util.*;
 
-public class SpadeCardStore extends CardStore {
+public class SpadeSuit extends CardSuit {
 
     private ArrayList<PlayingCard> spades;
     private SpadePlayingCard card;

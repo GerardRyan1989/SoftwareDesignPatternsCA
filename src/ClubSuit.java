@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class ClubCardStore extends CardStore {
+public class ClubSuit extends CardSuit {
 
 
     private ArrayList<PlayingCard> clubs;
@@ -61,6 +61,4 @@ public class ClubCardStore extends CardStore {
 
         this.cards = clubs;
     }
-
-
 }
