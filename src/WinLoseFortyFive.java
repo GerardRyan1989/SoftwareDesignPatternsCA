@@ -27,7 +27,5 @@ public class WinLoseFortyFive extends WinLoseCheck {
         }
 
         return winner;
-
     }
-
 }
