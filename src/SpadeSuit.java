@@ -51,7 +51,7 @@ public class SpadeSuit extends CardSuit {
                 case 12:
                     card = new SpadePlayingCard(10,"King", new ImageIcon("cards/KingSpade.jpg"));
                     break;
-                    //test for travis CI
+                    //test for team City
             }
 
             spades.add(card);
