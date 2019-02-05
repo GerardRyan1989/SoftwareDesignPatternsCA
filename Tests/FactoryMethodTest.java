@@ -17,10 +17,10 @@ public class FactoryMethodTest {
     @Before
     private void setUp() {
 
-            clubsList = new ArrayList<>();
-            spadesList = new ArrayList<>();
-            heartsList = new ArrayList<>();
-            diamondsList = new ArrayList<>();
+            clubsList = new ArrayList();
+            spadesList = new ArrayList();
+            heartsList = new ArrayList();
+            diamondsList = new ArrayList();
 
             diamonds = new DiamondSuit();
             clubs = new ClubSuit();
