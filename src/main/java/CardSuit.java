@@ -14,4 +14,6 @@ public abstract class CardSuit {
     public  int getNUmOfCardsPerSuit(){
         return NUM_OF_CARDS_PER_SUIT;
     }
+
+    //TestCommit
 }
