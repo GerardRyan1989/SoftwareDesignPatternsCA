@@ -7,4 +7,4 @@ public class BlackJack{
 
 
 
-//quality gate test sonarcloud
+//slack test
