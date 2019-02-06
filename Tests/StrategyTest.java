@@ -37,10 +37,6 @@ public class StrategyTest {
         Assert.assertEquals(175.00, c2.getBalance(), 0.0);
         Assert.assertSame(c2.shuffleBehaviour.shuffleDeck(), noShuffle.shuffleDeck());
         Assert.assertNotSame(c2.shuffleBehaviour.shuffleDeck(), shuffle.shuffleDeck());
-
-
-
-        Assert.assertEquals("2","1");
-
+        
     }
 }
