@@ -9,8 +9,4 @@ script:
 
 notifications:
   slack: gerardryan1989:kLHS9sSX8OryWYXE4YpTajfD
-    on_success: always
-    on_failure: always
-
-
 #slack test 2
