@@ -3,3 +3,8 @@ public class BlackJack{
 	MainMenuGUI mainMenu = new MainMenuGUI();//instansiating a new MainMenu GUI
 	}//end of main
 }//end of class
+
+
+
+
+//quality gate test sonarcloud
