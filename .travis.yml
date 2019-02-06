@@ -9,4 +9,11 @@ script:
 
 notifications:
   slack: gerardryan1989:kLHS9sSX8OryWYXE4YpTajfD
-#slack test 4
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: 1121913b6c9108039d5327178aaab93255eb07ed  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
