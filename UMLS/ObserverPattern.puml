@@ -1,0 +1,66 @@
+@startuml
+
+abstract class SystemUser{
+    -age: int
+    -name: String
+    -balance: double
+    #ShuffleBehaviour: shuffleBehaviour
+
+    +SystemUser()
+    +SystemUser(name :String, double:balance)
+    +SystemUser(name :String, int: age, double: balance)
+    +setName(name :String): void
+    +setAge(int: age): void
+    +setBalance(double : balance): void
+    +updateBalance(double : updateAmount): void
+    +getName(): String
+    +getAge(): int
+    +getBalance(): double
+    +toString(): String
+    +setShuffleBehaviour(): void
+    +update(): void
+
+}
+
+
+
+interface Observer{
+  +update(winner: SystemUser, stake: double); void
+}
+
+interface Subject{
+    +registerObserver(o: Observer): void
+    +removeObserver(o: Observer): void
+    +updateObservers(): void
+}
+
+class Pot{
+    -potSize: double
+    -stake: double
+    -winner: SystemUser
+    -observers: ArrayList
+    +Pot(): void
+    +registerObserver(o: Observer): void
+    +removeObserver(o: Observer): void
+    +updateObservers(): void
+    +setPotValues(stake: double): void
+    +gameFinished(winner: SystemUser): void
+    +setStake(stake: double): void
+    +getStake(): double
+}
+
+
+
+
+
+
+CardPlayer ..> Observer
+CardDealer ..> Observer
+Pot --* SystemUser
+
+CardDealer --|> SystemUser
+CardPlayer --|> SystemUser
+
+Pot ..> Subject
+
+@enduml

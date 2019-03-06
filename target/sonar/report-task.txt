@@ -1,0 +1,7 @@
+organization=gerardryan1989-github
+projectKey=SoftwareDesignPatternsCA:SoftwareDesignPatternsCA
+serverUrl=https://sonarcloud.io
+serverVersion=7.7.0.22487
+dashboardUrl=https://sonarcloud.io/dashboard?id=SoftwareDesignPatternsCA%3ASoftwareDesignPatternsCA
+ceTaskId=AWlS_sxhWtzwaoOZzD81
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWlS_sxhWtzwaoOZzD81

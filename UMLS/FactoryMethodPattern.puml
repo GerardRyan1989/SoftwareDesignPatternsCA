@@ -1,0 +1,94 @@
+@startuml
+
+
+ abstract class CardSuit{
+    {abstract}createCards(): ArrayList<PlayingCard>
+    +getCards(): ArrayList<PlayingCard>
+ }
+
+
+ Class ClubSuit{
+    -clubs: ArrayList<PlayingCard>
+    -card: ClubPlayingCard
+    CreateCards(): ArrayList<PlayingCard>
+ }
+
+
+ Class DiamondSuit{
+    -diamonds: ArrayList<PlayingCard>
+    -card: DiamondPlayingCard
+    CreateCards(): ArrayList<PlayingCard>
+ }
+
+
+ Class HeartSuit{
+    -hearts: ArrayList<PlayingCard>
+    -card: HeartPlayingCard
+    CreateCards(): ArrayList<PlayingCard>
+ }
+
+
+ Class SpadeSuit{
+    -spades: ArrayList<PlayingCard>
+    -card: SpadePlayingCard
+    CreateCards(): ArrayList<PlayingCard>
+ }
+
+
+ class PlayingCard{
+       #name: String
+       #suit: String
+       #value: int
+       #cardImage: ImageIcon
+       +PlayingCard()
+       +PlayingCard(name: String, suit: String, value: int, cardImage, ImageIcon)
+       +getName() :String
+       +setSuit(suit String): void
+       +getSuit():String
+       +getValue(): int
+       +getImage(): String
+       +toString(): String
+ }
+
+ class ClubPlayingCard{
+    +ClubPlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
+ }
+
+ class HeartPlayingCard{
+    +HeartPlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
+ }
+
+ class DiamondPlayingCard{
+    +DiamondPlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
+ }
+
+ class SpadePlayingCard{
+    +SpadePlayingCard(value: int,
+        name: String, cardImage, ImageIcon)
+ }
+
+
+ ClubPlayingCard --|> PlayingCard
+ HeartPlayingCard --|> PlayingCard
+ DiamondPlayingCard --|> PlayingCard
+ SpadePlayingCard --|> PlayingCard
+
+ ClubSuit --* ClubPlayingCard
+ HeartSuit --* HeartPlayingCard
+ DiamondSuit --* DiamondPlayingCard
+ SpadeSuit --* SpadePlayingCard
+
+
+ ClubSuit --|> CardSuit
+ DiamondSuit --|> CardSuit
+ HeartSuit --|> CardSuit
+ SpadeSuit --|> CardSuit
+
+
+
+
+
+@enduml

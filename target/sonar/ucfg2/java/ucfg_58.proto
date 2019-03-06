@@ -1,0 +1,55 @@
+
+'SystemUser#toString()Ljava/lang/String;
+__unknown_file ("1*Ð
+
+1b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(Ÿ
+œ
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(
+%0java.lang.String"__id**
+
+SystemUser"
+nameª
+§
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(
+%1java.lang.String"__concat*
+
+%0java.lang.String*
+ «
+¨
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(
+%2java.lang.String"__concat*
+
+%1java.lang.String*
+""­
+ª
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(&
+%3java.lang.String"__concat*
+
+%2java.lang.String*
+ â‚¬ù
+ö
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7) 7(F
+%4java.lang.String"Pjava.lang.String#format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;*"
+java.lang.String*
+%.2f*
+""½
+º
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(F
+%5java.lang.String"__concat*
+
+%3java.lang.String*
+
+%4java.lang.String"~
+b
+X/home/travis/build/GerardRyan1989/SoftwareDesignPatternsCA/src/main/java/SystemUser.java7 7(G
+
+%5java.lang.StringB
+
+SystemUser

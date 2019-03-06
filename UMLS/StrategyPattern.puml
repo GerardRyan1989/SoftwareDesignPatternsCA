@@ -1,0 +1,61 @@
+@startuml
+
+
+class CardPlayer{
+      +CardPlayer()
+}
+
+class CardDealer{
+      +CardDealer()
+}
+
+class Shuffle{
+    +shuffleDeck(): PlayingCard[]
+}
+
+
+class NoShuffle{
+   +shuffleDeck(): PlayingCard[]
+}
+
+interface ShuffleBehaviour{
+  +shuffleDeck(): PlayingCard[]
+}
+
+
+abstract class SystemUser{
+    -age: int
+    -name: String
+    -balance: double
+    #ShuffleBehaviour: shuffleBehaviour
+
+    +SystemUser()
+    +SystemUser(name :String, double:balance)
+    +SystemUser(name :String, int: age, double: balance)
+    +setName(name :String): void
+    +setAge(int: age): void
+    +setBalance(double : balance): void
+    +updateBalance(double : updateAmount): void
+    +getName(): String
+    +getAge(): int
+    +getBalance(): double
+    +toString(): String
+    +setShuffleBehaviour(): void
+    +update(): void
+
+
+}
+
+SystemUser --* ShuffleBehaviour
+
+Shuffle ..> ShuffleBehaviour
+NoShuffle ..> ShuffleBehaviour
+
+CardPlayer --* NoShuffle
+
+CardDealer --* Shuffle
+
+CardPlayer --|> SystemUser
+CardDealer --|> SystemUser
+
+@enduml

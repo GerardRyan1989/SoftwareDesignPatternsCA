@@ -1,0 +1,42 @@
+@startuml
+
+interface WinLoseTemplate{
+        +checkHandsAgainstEachOther(userValue: int, dealerValue: int, cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
+        +void returnWinner(winner: SystemUser): void
+
+}
+
+abstract class WinLoseCheck{
+        pot: Pot
+        -bustValue: int
+        -gameName: String
+        +winLoseCheck(userValue: int, dealerValue: int, cardPlayer CardPlayer, cardDealer CardDealer, pot: Pot): void
+        +returnWinner(systemUser SystemUser): void
+        {abstract}+checkIfBust(handValue: int, winner SystemUser, bust SystemUser, Pot pot): boolean
+        +setBustValue(bustValue: int): void
+        +getBustValue(): int
+        +setGameName(gameName: String): void
+        +getGameName(): String
+
+}
+
+
+class WinLoseFortyFive{
+    +checkHandsAgainstEachOther(userValue: int, dealerValue: int,
+        cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
+    +checkIfBust(handValue: int, winner SystemUser, bust SystemUser,  Pot pot): boolean
+}
+
+
+class WinLoseBlackJack{
+    +checkHandsAgainstEachOther(userValue: int, dealerValue: int,
+        cardPlayer: SystemUser ,  dealer; SystemUser): SystemUser
+    +checkIfBust(handValue: int, winner SystemUser, bust SystemUser, Pot pot): boolean
+}
+
+
+WinLoseBlackJack --|> WinLoseCheck
+WinLoseFortyFive --|> WinLoseCheck
+
+WinLoseCheck ..> WinLoseTemplate
+@enduml

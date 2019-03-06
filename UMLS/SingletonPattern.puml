@@ -1,0 +1,19 @@
+@startuml
+
+Class Deck{
+    -deck: PlayingCard[]
+    -diamonds: DiamondSuit
+    -clubs: ClubSuit
+    -spades: SpadeSuit
+    -hearts: HeartSuit
+    -allSuits: ArrayList<PlayingCard>
+    {static} uniqueDeck: Deck
+
+
+    -Deck()
+    {static}+getDeck(): Deck
+    +createDeck(): PlayingCard[]
+
+}
+
+@enduml
