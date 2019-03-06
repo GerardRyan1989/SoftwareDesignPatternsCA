@@ -15,7 +15,7 @@ public class FactoryMethodTest {
     private final int NUMOFCARDSINASUITE = 13;
 
     @Before
-    private void setUp() {
+    public void setUp() {
 
             clubsList = new ArrayList();
             spadesList = new ArrayList();
