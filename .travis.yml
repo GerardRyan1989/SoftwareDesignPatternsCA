@@ -1,5 +1,5 @@
 language: java
-
+install: true
 addons:
   sonarcloud:
     organization: "gerardryan1989-github" #the key of the org you chose at step #3
