@@ -3,5 +3,5 @@ projectKey=SoftwareDesignPatternsCA:SoftwareDesignPatternsCA
 serverUrl=https://sonarcloud.io
 serverVersion=7.8.0.23279
 dashboardUrl=https://sonarcloud.io/dashboard?id=SoftwareDesignPatternsCA%3ASoftwareDesignPatternsCA
-ceTaskId=AWoZH5dXBqjuEZ89t76g
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWoZH5dXBqjuEZ89t76g
+ceTaskId=AWoZLL-pbZ-4oYCt2AzC
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWoZLL-pbZ-4oYCt2AzC
